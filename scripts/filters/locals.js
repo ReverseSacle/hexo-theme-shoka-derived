@@ -2,21 +2,23 @@
 
 'use strict';
 
-//const path = require('path');
+// const path = require('path');
 const url = require('url');
 
-const fmtNum = num => {
+// num => {}
+const fmtNum = function(num) {
   return num < 10 ? '0' + num : num;
 };
 
-
-hexo.extend.filter.register('template_locals', locals => {
+//locals => {}
+hexo.extend.filter.register('template_locals', function(locals) {
   const { env, config } = hexo;
   const { __, theme } = locals;
   const { i18n } = hexo.theme;
 
   var pangu = theme.pangu ? require('pangu') : {
-    spacing: data => { return data; }
+    // data => {}
+    spacing: function(data) { return data; }
   };
 
   // Language & Config
@@ -38,7 +40,8 @@ hexo.extend.filter.register('template_locals', locals => {
   }
   locals.page.lastcat = '';
   if (locals.page.categories) {
-    locals.page.categories.map((cat) => {
+    // (cat) => {}
+    locals.page.categories.map(function(cat) {
       if(cat.name) {
         cat.name = locals.page.lastcat = pangu.spacing(cat.name);
       }

@@ -25,11 +25,11 @@ const domInit = function() {
   showContents.addEventListener('click', sideBarToggleHandle);
 }
 
-const pjaxReload = function () {
+const pjaxReload = function() {
   pagePosition();
 
   if(sideBar.hasClass('on')) {
-    transition(sideBar, function () {
+    transition(sideBar, function() {
         sideBar.removeClass('on');
         menuToggle.removeClass('close');
       }); // 'transition.slideRightOut'
@@ -40,7 +40,7 @@ const pjaxReload = function () {
   pageScroll(0);
 }
 
-const siteRefresh = function (reload) {
+const siteRefresh = function(reload) {
   LOCAL_HASH = 0;
   LOCAL_URL = window.location.href;
 
@@ -91,7 +91,7 @@ const siteRefresh = function (reload) {
   lazyload.observe();
 }
 
-const siteInit = function () {
+const siteInit = function() {
 
   domInit();
 

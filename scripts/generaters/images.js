@@ -2,7 +2,8 @@
 
 const fs = require('hexo-fs');
 
-hexo.extend.generator.register('images', function(locals){
+// function(locals)
+hexo.extend.generator.register('images', function(){
 //  const config = hexo.config;
   const theme = hexo.theme.config;
   const dir = 'source/_data/' + theme.images + '/';
@@ -15,7 +16,7 @@ hexo.extend.generator.register('images', function(locals){
   files.forEach(file => {
     result.push({
       path: theme.images + '/' + file,
-      data: function () {
+      data: function() {
         return fs.createReadStream(dir + file);
       }
     });

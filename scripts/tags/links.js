@@ -40,7 +40,8 @@ function linkGrid(args, content) {
 
   var result = '';
 
-  list.forEach(item => {
+  // item => {}
+  list.forEach(function(item) {
     if(!item.url || !item.site) { return; }
 
     var urlparam = {};

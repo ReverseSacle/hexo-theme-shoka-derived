@@ -2,8 +2,8 @@
 const fs = require('hexo-fs');
 //const url = require('url');
 
-
-hexo.extend.generator.register('script', function(locals){
+// function(locals)
+hexo.extend.generator.register('script', function() {
   const config = hexo.config;
   const theme = hexo.theme.config;
 
@@ -59,7 +59,7 @@ hexo.extend.generator.register('script', function(locals){
 
   return {
       path: theme.js + '/app.js',
-      data: function(){
+      data: function() {
         return hexo.render.renderSync({text:  text, engine: 'js'});
       }
     };

@@ -31,7 +31,8 @@ const cardActive = function() {
     $('.index.wrap .item:first-child').addClass("show");
   }
 
-  $.each('.cards .item', function(element, index) {
+  //function(element, index)
+  $.each('.cards .item', function(element) {
     ['mouseenter', 'touchstart'].forEach(function(item){
       element.addEventListener(item, function(event) {
         if($('.cards .item.active')) {
@@ -108,8 +109,9 @@ const postFancybox = function(p) {
       });
 
       $.each(p + ' div.gallery', function (el, i) {
-        q(el).justifiedGallery({rowHeight: q(el).data('height')||120, rel: 'gallery-' + i}).on('jg.complete', function () {
-          q(this).find('a').each(function(k, ele) {
+        q(el).justifiedGallery({rowHeight: q(el).data('height')||120, rel: 'gallery-' + i}).on('jg.complete', function() {
+          //function(k, ele)
+          q(this).find('a').each(function(_, ele) {
             ele.attr('data-fancybox', 'gallery-' + i);
           });
         });
@@ -128,7 +130,7 @@ const postFancybox = function(p) {
   }
 }
 
-const postBeauty = function () {
+const postBeauty = function() {
   loadComments();
 
   if(!$('.md')){ return; }
@@ -172,17 +174,17 @@ const postBeauty = function () {
     element.style.counterReset = "counter " + parseInt(element.attr('start') - 1);
   })
 
-  $.each('.md table', function (element) {
+  $.each('.md table', function(element) {
     element.wrap({
       className: 'table-container'
     });
   });
 
-  $.each('.highlight > .table-container', function (element) {
+  $.each('.highlight > .table-container', function(element) {
     element.className = 'code-container';
   });
 
-  $.each('figure.highlight', function (element) {
+  $.each('figure.highlight', function(element) {
 
     var code_container = element.child('.code-container');
     var caption = element.child('figcaption');
@@ -193,7 +195,7 @@ const postBeauty = function () {
     if(LOCAL.nocopy) {
       copyBtn.remove();
     } else {
-      copyBtn.addEventListener('click', function (event) {
+      copyBtn.addEventListener('click', function(event) {
         var target = event.currentTarget;
         var comma = '', code = '';
         code_container.find('pre').forEach(function(line) {
@@ -207,15 +209,15 @@ const postBeauty = function () {
           showtip(LOCAL.copyright);
         })
       });
-      copyBtn.addEventListener('mouseleave', function (event) {
-        setTimeout(function () {
+      copyBtn.addEventListener('mouseleave', function(event) {
+        setTimeout(function() {
           event.target.child('.ic').className = 'ic i-clipboard';
         }, 1000);
       });
     }
 
     var breakBtn = element.child('.breakline-btn');
-    breakBtn.addEventListener('click', function (event) {
+    breakBtn.addEventListener('click', function(event) {
       var target = event.currentTarget;
       if (element.hasClass('breakline')) {
         element.removeClass('breakline');
@@ -292,8 +294,8 @@ const postBeauty = function () {
   });
 
   //quiz
-  $.each('.quiz > ul.options li', function (element) {
-    element.addEventListener('click', function (event) {
+  $.each('.quiz > ul.options li', function(element) {
+    element.addEventListener('click', function(event) {
       if (element.hasClass('correct')) {
         element.toggleClass('right');
         element.parentNode.parentNode.addClass('show');
@@ -303,13 +305,13 @@ const postBeauty = function () {
     });
   });
 
-  $.each('.quiz > p', function (element) {
-    element.addEventListener('click', function (event) {
+  $.each('.quiz > p', function(element) {
+    element.addEventListener('click', function(event) {
       element.parentNode.toggleClass('show');
     });
   });
 
-  $.each('.quiz > p:first-child', function (element) {
+  $.each('.quiz > p:first-child', function(element) {
     var quiz = element.parentNode;
     var type = 'choice';
     if(quiz.hasClass('true') || quiz.hasClass('false'))
@@ -323,7 +325,7 @@ const postBeauty = function () {
     element.attr('data-type', LOCAL.quiz[type]);
   });
 
-  $.each('.quiz .mistake', function (element) {
+  $.each('.quiz .mistake', function(element) {
     element.attr('data-type', LOCAL.quiz.mistake);
   });
 
@@ -336,7 +338,8 @@ const postBeauty = function () {
 const tabFormat = function() {
   // tab
   var first_tab;
-  $.each('div.tab', function(element, index) {
+  //function(element, index)
+  $.each('div.tab', function(element) {
     if(element.attr('data-ready')){ return; }
 
     var id = element.attr('data-id');
@@ -390,7 +393,7 @@ const tabFormat = function() {
   });
 }
 
-const loadComments = function () {
+const loadComments = function() {
   var element = $('#comments');
   if (!element) {
     goToComment.display("none");

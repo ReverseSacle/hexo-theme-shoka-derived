@@ -66,7 +66,7 @@ const changeMetaTheme = function(color) {
   $('meta[name="theme-color"]').attr('content', color);
 }
 
-const themeColorListener = function () {
+const themeColorListener = function() {
   window.matchMedia('(prefers-color-scheme: dark)').addListener(function(mediaQueryList) {
     if(mediaQueryList.matches){ changeTheme('dark'); } 
     else { changeTheme(); }
@@ -120,7 +120,7 @@ const themeColorListener = function () {
   });
 }
 
-const visibilityListener = function () {
+const visibilityListener = function() {
   document.addEventListener('visibilitychange', function() {
     switch(document.visibilityState) {
       case 'hidden':
@@ -133,7 +133,7 @@ const visibilityListener = function () {
         $('[rel="icon"]').attr('href', statics + CONFIG.favicon.normal);
         document.title = LOCAL.favicon.show;
         if(CONFIG.loader.switch){ Loader.hide(1000); }
-        titleTime = setTimeout(function () {
+        titleTime = setTimeout(function() {
           document.title = originTitle;
         }, 2000);
         break;
@@ -157,7 +157,7 @@ const showtip = function(msg) {
   }, 3000);
 }
 
-const resizeHandle = function (event) {
+const resizeHandle = function(event) {
   siteNavHeight = siteNav.height();
   headerHightInner = siteHeader.height();
   headerHight = headerHightInner + $('#waves').height();
@@ -169,7 +169,7 @@ const resizeHandle = function (event) {
   sideBar.child('.panels').height(oWinHeight + 'px');
 }
 
-const scrollHandle = function (event) {
+const scrollHandle = function(event) {
   var winHeight = window.innerHeight;
   var docHeight = getDocHeight();
   var contentVisibilityHeight = docHeight > winHeight ? docHeight - winHeight : document.body.scrollHeight - winHeight;

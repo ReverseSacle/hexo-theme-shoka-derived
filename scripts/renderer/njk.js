@@ -4,7 +4,8 @@ const nunjucks = require('nunjucks');
 const path = require('path');
 
 const pangu = require('pangu') || {
-    spacing: data => { return data; }
+  // data => {}
+  spacing: function(data) { return data; }
 };
 
 function njkCompile(data) {
@@ -15,13 +16,15 @@ function njkCompile(data) {
     trimBlocks: false,
     lstripBlocks: false
   });
-  env.addFilter('safedump', dictionary => {
+  // dictionary => {}
+  env.addFilter('safedump', function(dictionary) {
     if (typeof dictionary !== 'undefined' && dictionary !== null) {
       return JSON.stringify(dictionary);
     }
     return '""';
   });
-  env.addFilter('pangu', dictionary => {
+  // dictionary => {}
+  env.addFilter('pangu', function(dictionary) {
     if (typeof dictionary !== 'undefined' && dictionary !== null) {
       return pangu.spacing(dictionary);
     }

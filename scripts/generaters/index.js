@@ -29,16 +29,15 @@ hexo.extend.generator.register('index', function(locals) {
     }
   }
 
+  // (cat) => {}
   if (categories && categories.length) {
-    categories.forEach((cat) => {
+    categories.forEach(function(cat) {
       let cover = 'source/_posts/' + cat.slug + '/cover.jpg';
 
       if (fs.existsSync(cover)) {
         covers.push({
           path: cat.slug + '/cover.jpg',
-          data: function () {
-            return fs.createReadStream(cover);
-          }
+          data: function() { return fs.createReadStream(cover); }
         });
 
         let topcat = getTopcat(cat);
@@ -55,10 +54,10 @@ hexo.extend.generator.register('index', function(locals) {
           cat.subs = child.sort({name: 1}).limit(6).toArray();
           pl = Math.max(0, pl - child.length);
           if(pl > 0) {
-            cat.subs.push.apply(cat.subs, cat.posts.sort({title: 1}).filter(function(item, i) {
-                                            if(item.categories.last()._id == cat._id)
-                                              return true
-                                          }).limit(pl).toArray());
+            // function(item, i)
+            cat.subs.push.apply(cat.subs, cat.posts.sort({title: 1}).filter(function(item) {
+                if(item.categories.last()._id == cat._id){ return true; }
+            }).limit(pl).toArray());
           }
         } else {
           cat.subs = cat.posts.sort({title: 1}).limit(6).toArray();

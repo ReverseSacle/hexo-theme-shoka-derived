@@ -2,7 +2,8 @@
 
 const pagination = require('hexo-pagination');
 
-const fmtNum = num => {
+// num => {}
+const fmtNum = function(num) {
   return num < 10 ? '0' + num : num;
 };
 
@@ -57,7 +58,8 @@ if (!(hexo.config.archive && hexo.config.archive.enabled === false)) {
     const posts = {};
 
     // Organize posts by date
-    allPosts.forEach(post => {
+    // post => {}
+    allPosts.forEach(function(post) {
       const date = post.date;
       const year = date.year();
       const month = date.month() + 1; // month is started from 0

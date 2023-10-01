@@ -27,7 +27,7 @@ Object.assign(HTMLElement.prototype, {
     }
     return child;
   },
-  wrap: function (obj) {
+  wrap: function(obj) {
     var box = document.createElement('div');
     Object.assign(box, obj);
     this.parentNode.insertBefore(box, this);

@@ -5,7 +5,8 @@ const fs = require('hexo-fs');
 const path = require('path');
 const yaml = require('js-yaml');
 
-hexo.extend.filter.register('before_generate', () => {
+// () => {}
+hexo.extend.filter.register('before_generate', function() {
   if (hexo.config.theme_config) {
     hexo.theme.config = merge(hexo.theme.config, hexo.config.theme_config);
   }
@@ -16,7 +17,8 @@ hexo.extend.filter.register('before_generate', () => {
 //    const { language } = hexo.config;
     const { i18n } = hexo.theme;
 
-    const mergeLang = lang => {
+    // lang => {}
+    const mergeLang = function(lang) {
       if (data.languages[lang])
         i18n.set(lang, merge(i18n.get([lang]), data.languages[lang]));
     };

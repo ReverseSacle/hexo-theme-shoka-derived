@@ -1,30 +1,31 @@
-const getRndInteger = function (min, max) {
+const getRndInteger = function(min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
-const getDocHeight = function () {
+const getDocHeight = function() {
   return $('main > .inner').offsetHeight;
 }
 
 const getScript = function(url, callback, condition) {
-  if (condition) {
-    callback();
-  } else {
+  if (condition) { callback(); } 
+  else 
+  {
     var script = document.createElement('script');
-    script.onload = script.onreadystatechange = function(_, isAbort) {
-      if (isAbort || !script.readyState || /loaded|complete/.test(script.readyState)) {
+    script.onload = (script.onreadystatechange = function(_, isAbort){
+      if (isAbort || !script.readyState || /loaded|complete/.test(script.readyState)) 
+      {
         script.onload = script.onreadystatechange = null;
         script = undefined;
-        if (!isAbort && callback) setTimeout(callback, 0);
+        if (!isAbort && callback){ setTimeout(callback, 0); }
       }
-    };
+    });
     script.src = url;
     document.head.appendChild(script);
   }
 }
 
 const assetUrl = function(asset, type) {
-  var str = CONFIG[asset][type];
+  const str = CONFIG[asset][type];
   if(str.indexOf('npm')>-1||str.indexOf('gh')>-1||str.indexOf('combine')>-1)
     return "//cdn.jsdelivr.net/" + str;
 
@@ -41,8 +42,8 @@ const vendorJs = function(type, callback, condition) {
     }, condition || window[type]);
   }
 }
-
-const vendorCss = function(type, condition) {
+//function(type, condition)
+const vendorCss = function(type) {
   if(window['css'+type]){ return; }
 
   if(LOCAL[type]) {
@@ -56,8 +57,9 @@ const vendorCss = function(type, condition) {
 }
 
 const pjaxScript = function(element) {
-  var code = element.text || element.textContent || element.innerHTML || '';
+  const code = element.text || element.textContent || element.innerHTML || '';
   var parent = element.parentNode;
+
   parent.removeChild(element);
   var script = document.createElement('script');
   if (element.id) { script.id = element.id;}
@@ -78,14 +80,12 @@ const pjaxScript = function(element) {
 }
 
 const pageScroll = function(target, offset, complete) {
-  var opt = {
+  const opt = {
     targets: typeof offset == 'number' ? target.parentNode : document.scrollingElement,
     duration: 500,
     easing: "easeInOutQuad",
     scrollTop: offset || (typeof target == 'number' ? target : (target ? target.top() + document.documentElement.scrollTop - siteNavHeight : 0)),
-    complete: function() {
-      complete && complete();
-    }
+    complete: function() { complete && complete(); }
   }
   anime(opt);
 }
@@ -103,9 +103,8 @@ const transition = function(target, type, complete) {
       break;
     case 'bounceUpIn':
       animation = {
-        begin: function(anim) {
-          target.display('block');
-        },
+        //function(anim)
+        begin: function() { target.display('block'); },
         translateY: [
           { value: -60, duration: 200 },
           { value: 10, duration: 200 },
@@ -118,9 +117,8 @@ const transition = function(target, type, complete) {
       break;
     case 'shrinkIn':
       animation = {
-        begin: function(anim) {
-          target.display('block')
-        },
+        //function(anim)
+        begin: function() { target.display('block') },
         scale: [
           { value: 1.1, duration: 300 },
           { value: 1, duration: 200 }
@@ -131,9 +129,8 @@ const transition = function(target, type, complete) {
       break;
     case 'slideRightIn':
       animation = {
-        begin: function(anim) {
-          target.display('block')
-        },
+        //function(anim)
+        begin: function() { target.display('block') },
         translateX: [100, 0],
         opacity: [0, 1]
       };
@@ -157,7 +154,7 @@ const transition = function(target, type, complete) {
   }, animation)).finished.then(function() {
       target.display(display);
       complete && complete();
-    });
+  });
 }
 
 const store = {

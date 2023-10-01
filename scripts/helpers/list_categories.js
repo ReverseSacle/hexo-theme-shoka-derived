@@ -2,13 +2,15 @@
 
 var fs = require('hexo-fs');
 
-const prepareQuery = (categories, parent) => {
+// (categories, parent) => {}
+const prepareQuery = function(categories, parent) {
   const query = {};
 
   if (parent) { query.parent = parent; } 
   else { query.parent = {$exists: false}; }
 
-  return categories.find(query).sort('name', 1).filter(cat => cat.length);
+  // cat => {}
+  return categories.find(query).sort('name', 1).filter(function(cat) { return cat.length; });
 };
 
 hexo.extend.helper.register('_list_categories', function(depth = 0) {
@@ -17,11 +19,12 @@ hexo.extend.helper.register('_list_categories', function(depth = 0) {
 
   if (!categories || !categories.length) return '';
 
-
-  const hierarchicalList = (level, parent) => {
+  // (level, parent) => {}
+  const hierarchicalList = function(level, parent) {
     let result = '';
 
-    prepareQuery(categories, parent).forEach((cat, i) => {
+    // (cat, i) => {}
+    prepareQuery(categories, parent).forEach(function(cat) {
       let child;
 
       if (level + 1 < depth) {
@@ -58,12 +61,14 @@ hexo.extend.helper.register('_categories', function() {
   if (!categories || !categories.length) return '';
 
   var pangu = hexo.theme.pangu ? require('pangu') : {
-    spacing: data => { return data; }
+    // data => {}
+    spacing: function(data) { return data; }
   };
 
   let result = {};
 
-  categories.forEach((cat, i) => {
+  // (cat, i) => {}
+  categories.forEach(function(cat) {
     let child = prepareQuery(categories, cat._id);
     let cover = 'source/_posts' + cat.path.replace(hexo.config.category_dir, '') + 'cover.jpg'
 
@@ -89,9 +94,11 @@ hexo.extend.helper.register('_category_prev', function(name) {
 
   let result = '';
 
-  categories.find({name}).forEach((current) => {
+  // (current) => {}
+  categories.find({name}).forEach(function(current) {
     if(current.parent) {
-      categories.find({_id: current.parent}).forEach((cat, i) => {
+      // (cat, i) => {}
+      categories.find({_id: current.parent}).forEach(function(cat) {
         result += `<a href="${hexo.url_for(cat.path)}">${cat.name}</a>`;
       })
     }
@@ -109,10 +116,12 @@ hexo.extend.helper.register('_category_posts', function(page) {
   let result = '';
   let cat = page.categories.toArray();
 
-  categories.find({_id: cat[cat.length - 1]._id}).forEach((category) => {
+  // (category) => {}
+  categories.find({_id: cat[cat.length - 1]._id}).forEach(function(category) {
 
     if(category.posts) {
-      category.posts.sort('date', 1).forEach((post) => {
+      // (post) => {}
+      category.posts.sort('date', 1).forEach(function(post) {
         var current = '';
         if(post.path == page.path) { current = ' class="active"'; }
         result += `<li${current}><a href="${hexo.url_for(post.path)}" rel="bookmark" title="${post.title}">${post.title}</a></li>`;
