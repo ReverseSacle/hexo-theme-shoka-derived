@@ -135,3 +135,4 @@
 + Delete `media` plugin
 + Delete the `fireworks` effect
 + Remove the subtitle in the title
++ Code correct
