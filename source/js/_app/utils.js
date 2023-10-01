@@ -24,12 +24,12 @@ const getScript = function(url, callback, condition) {
 }
 
 const assetUrl = function(asset, type) {
-  var str = CONFIG[asset][type]
+  var str = CONFIG[asset][type];
   if(str.indexOf('npm')>-1||str.indexOf('gh')>-1||str.indexOf('combine')>-1)
-    return "//cdn.jsdelivr.net/" + str
+    return "//cdn.jsdelivr.net/" + str;
 
   if(str.indexOf('http')>-1)
-    return str
+    return str;
 
   return statics + str;
 }
@@ -43,11 +43,9 @@ const vendorJs = function(type, callback, condition) {
 }
 
 const vendorCss = function(type, condition) {
-  if(window['css'+type])
-    return;
+  if(window['css'+type]){ return; }
 
   if(LOCAL[type]) {
-
     document.head.createChild('link', {
       rel: 'stylesheet',
       href: assetUrl("css", type)
@@ -62,15 +60,9 @@ const pjaxScript = function(element) {
   var parent = element.parentNode;
   parent.removeChild(element);
   var script = document.createElement('script');
-  if (element.id) {
-    script.id = element.id;
-  }
-  if (element.className) {
-    script.className = element.className;
-  }
-  if (element.type) {
-    script.type = element.type;
-  }
+  if (element.id) { script.id = element.id;}
+  if (element.className) { script.className = element.className; }
+  if (element.type) { script.type = element.type; }
   if (element.src) {
     script.src = element.src;
     // Force synchronous loading of peripheral JS.
@@ -92,27 +84,27 @@ const pageScroll = function(target, offset, complete) {
     easing: "easeInOutQuad",
     scrollTop: offset || (typeof target == 'number' ? target : (target ? target.top() + document.documentElement.scrollTop - siteNavHeight : 0)),
     complete: function() {
-      complete && complete()
+      complete && complete();
     }
   }
   anime(opt);
 }
 
 const transition = function(target, type, complete) {
-  var animation = {}
-  var display = 'none'
+  var animation = {};
+  var display = 'none';
   switch(type) {
     case 0:
-      animation = {opacity: [1, 0]}
-    break;
+      animation = {opacity: [1, 0]};
+      break;
     case 1:
-      animation = {opacity: [0, 1]}
-      display = 'block'
-    break;
+      animation = {opacity: [0, 1]};
+      display = 'block';
+      break;
     case 'bounceUpIn':
       animation = {
         begin: function(anim) {
-          target.display('block')
+          target.display('block');
         },
         translateY: [
           { value: -60, duration: 200 },
@@ -121,9 +113,9 @@ const transition = function(target, type, complete) {
           { value: 0, duration: 200 }
         ],
         opacity: [0, 1]
-      }
-      display = 'block'
-    break;
+      };
+      display = 'block';
+      break;
     case 'shrinkIn':
       animation = {
         begin: function(anim) {
@@ -134,9 +126,9 @@ const transition = function(target, type, complete) {
           { value: 1, duration: 200 }
         ],
         opacity: 1
-      }
-      display = 'block'
-    break;
+      };
+      display = 'block';
+      break;
     case 'slideRightIn':
       animation = {
         begin: function(anim) {
@@ -144,27 +136,27 @@ const transition = function(target, type, complete) {
         },
         translateX: [100, 0],
         opacity: [0, 1]
-      }
-      display = 'block'
-    break;
+      };
+      display = 'block';
+      break;
     case 'slideRightOut':
       animation = {
         translateX: [0, 100],
         opacity: [1, 0]
-      }
-    break;
+      };
+      break;
     default:
-      animation = type
-      display = type.display
-    break;
+      animation = type;
+      display = type.display;
+      break;
   }
   anime(Object.assign({
     targets: target,
     duration: 200,
     easing: 'linear'
   }, animation)).finished.then(function() {
-      target.display(display)
-      complete && complete()
+      target.display(display);
+      complete && complete();
     });
 }
 

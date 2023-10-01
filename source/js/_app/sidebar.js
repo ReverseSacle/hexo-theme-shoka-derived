@@ -2,11 +2,8 @@ const sideBarToggleHandle = function (event, force) {
   if(sideBar.hasClass('on')) {
     sideBar.removeClass('on');
     menuToggle.removeClass('close');
-    if(force) {
-      sideBar.style = '';
-    } else {
-      transition(sideBar, 'slideRightOut');
-    }
+    if(force) { sideBar.style = ''; } 
+    else { transition(sideBar, 'slideRightOut'); }
   } else {
     if(force) {
       sideBar.style = '';
@@ -31,21 +28,17 @@ const sideBarTab = function () {
   list.className = 'tab';
 
   ['contents', 'related', 'overview'].forEach(function (item) {
-    var element = sideBar.child('.panel.' + item)
+    var element = sideBar.child('.panel.' + item);
 
     if(element.innerHTML.replace(/(^\s*)|(\s*$)/g, "").length < 1) {
-      if(item == 'contents') {
-        showContents.display("none")
-      }
+      if(item == 'contents') { showContents.display("none"); }
       return;
     }
 
-    if(item == 'contents') {
-      showContents.display("")
-    }
+    if(item == 'contents') { showContents.display(""); }
 
-    var tab = document.createElement('li')
-    var span = document.createElement('span')
+    var tab = document.createElement('li');
+    var span = document.createElement('span');
     var text = document.createTextNode(element.attr('data-title'));
     span.appendChild(text);
     tab.appendChild(span);
@@ -60,15 +53,14 @@ const sideBarTab = function () {
 
     tab.addEventListener('click', function (element) {
       var target = event.currentTarget;
-      if (target.hasClass('active'))
-        return;
+      if (target.hasClass('active')){ return; }
 
       sideBar.find('.tab .item').forEach(function (element) {
-        element.removeClass('active')
+        element.removeClass('active');
       });
 
       sideBar.find('.panel').forEach(function (element) {
-        element.removeClass('active')
+        element.removeClass('active');
       });
 
       sideBar.child('.panel.' + target.className.replace(' item', '')).addClass('active');
@@ -82,18 +74,16 @@ const sideBarTab = function () {
 
   if (list.childNodes.length > 1) {
     sideBarInner.insertBefore(list, sideBarInner.childNodes[0]);
-    sideBar.child('.panels').style.paddingTop = ''
+    sideBar.child('.panels').style.paddingTop = '';
   } else {
-    sideBar.child('.panels').style.paddingTop = '.625rem'
+    sideBar.child('.panels').style.paddingTop = '.625rem';
   }
 }
 
 const sidebarTOC = function () {
   var navItems = $.all('.contents li');
 
-  if (navItems.length < 1) {
-    return;
-  }
+  if (navItems.length < 1) { return; }
 
   var sections = Array.prototype.slice.call(navItems) || [];
   var activeLock = null;
@@ -101,8 +91,7 @@ const sidebarTOC = function () {
   sections = sections.map(function (element, index) {
     var link = element.child('a.toc-link');
     var anchor = $(decodeURI(link.attr('href')));
-    if(!anchor)
-      return
+    if(!anchor){ return; }
     var alink = anchor.child('a.anchor');
 
     var anchorScroll = function (event) {
@@ -111,16 +100,16 @@ const sidebarTOC = function () {
 
       activeLock = index;
       pageScroll(target, null, function() {
-          activateNavByIndex(index)
-          activeLock = null
-        })
+          activateNavByIndex(index);
+          activeLock = null;
+      });
     };
 
     // TOC item animation navigate.
     link.addEventListener('click', anchorScroll);
     alink && alink.addEventListener('click', function(event) {
-      anchorScroll(event)
-      clipBoard(CONFIG.hostname + '/' + LOCAL.path + event.currentTarget.attr('href'))
+      anchorScroll(event);
+      clipBoard(CONFIG.hostname + '/' + LOCAL.path + event.currentTarget.attr('href'));
     });
     return anchor;
   });
@@ -128,14 +117,11 @@ const sidebarTOC = function () {
   var tocElement = sideBar.child('.contents.panel');
 
   var activateNavByIndex = function (index, lock) {
-    var target = navItems[index]
+    var target = navItems[index];
 
-    if (!target)
-      return;
+    if (!target){ return; }
 
-    if (target.hasClass('current')) {
-      return;
-    }
+    if (target.hasClass('current')) { return; }
 
     $.each('.toc .active', function (element) {
       element && element.removeClass('active current');
@@ -154,15 +140,13 @@ const sidebarTOC = function () {
       if (parent.matches('li')) {
         parent.addClass('active');
         var t = $(parent.child('a.toc-link').attr('href'))
-        if(t) {
-          t.addClass('active');
-        }
+        if(t) { t.addClass('active'); }
       }
       parent = parent.parentNode;
     }
     // Scrolling to center active TOC element if TOC content is taller then viewport.
     if(getComputedStyle(sideBar).display != 'none' && tocElement.hasClass('active')) {
-      pageScroll(tocElement, target.offsetTop- (tocElement.offsetHeight / 4))
+      pageScroll(tocElement, target.offsetTop- (tocElement.offsetHeight / 4));
     }
   }
 
@@ -185,14 +169,11 @@ const sidebarTOC = function () {
   }
 
   var createIntersectionObserver = function() {
-    if (!window.IntersectionObserver)
-      return
+    if (!window.IntersectionObserver){ return; }
 
     var observer = new IntersectionObserver(function (entries, observe) {
       var index = findIndex(entries) + (diffY < 0? 1 : 0);
-      if(activeLock === null) {
-        activateNavByIndex(index);
-      }
+      if(activeLock === null) { activateNavByIndex(index); }
     }, {
       rootMargin: '0px 0px -100% 0px',
       threshold: 0
@@ -222,10 +203,11 @@ const menuActive = function () {
   $.each('.menu .item:not(.title)', function (element) {
     var target = element.child('a[href]');
     var parentItem = element.parentNode.parentNode;
-    if (!target) return;
+    if (!target){ return; }
+    
     var isSamePath = target.pathname === location.pathname || target.pathname === location.pathname.replace('index.html', '');
     var isSubPath = !CONFIG.root.startsWith(target.pathname) && location.pathname.startsWith(target.pathname);
-    var active = target.hostname === location.hostname && (isSamePath || isSubPath)
+    var active = target.hostname === location.hostname && (isSamePath || isSubPath);
     element.toggleClass('active', active);
     if(element.parentNode.child('.active') && parentItem.hasClass('dropdown')) {
       parentItem.removeClass('active').addClass('expand');

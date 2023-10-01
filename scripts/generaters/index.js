@@ -22,26 +22,26 @@ hexo.extend.generator.register('index', function(locals) {
 
   var getTopcat = function(cat) {
     if (cat.parent) {
-      var pCat = categories.findOne({'_id': cat.parent})
+      var pCat = categories.findOne({'_id': cat.parent});
       return getTopcat(pCat);
     } else {
-      return cat
+      return cat;
     }
   }
 
   if (categories && categories.length) {
     categories.forEach((cat) => {
-      let cover = 'source/_posts/' + cat.slug + '/cover.jpg'
+      let cover = 'source/_posts/' + cat.slug + '/cover.jpg';
 
       if (fs.existsSync(cover)) {
         covers.push({
           path: cat.slug + '/cover.jpg',
           data: function () {
-            return fs.createReadStream(cover)
+            return fs.createReadStream(cover);
           }
         });
 
-        let topcat = getTopcat(cat)
+        let topcat = getTopcat(cat);
 
         if (topcat._id != cat._id) {
           cat.top = topcat;
@@ -53,7 +53,7 @@ hexo.extend.generator.register('index', function(locals) {
         if (child.length != 0) {
           cat.child = child.length;
           cat.subs = child.sort({name: 1}).limit(6).toArray();
-          pl = Math.max(0, pl - child.length)
+          pl = Math.max(0, pl - child.length);
           if(pl > 0) {
             cat.subs.push.apply(cat.subs, cat.posts.sort({title: 1}).filter(function(item, i) {
                                             if(item.categories.last()._id == cat._id)
@@ -64,7 +64,7 @@ hexo.extend.generator.register('index', function(locals) {
           cat.subs = cat.posts.sort({title: 1}).limit(6).toArray();
         }
 
-        catlist.push(cat)
+        catlist.push(cat);
       }
     });
   }
@@ -91,7 +91,5 @@ hexo.extend.generator.register('index', function(locals) {
         }
       }];
   }
-
   return [...covers, ...pages];
-
 });

@@ -34,9 +34,9 @@ if (!(hexo.config.archive && hexo.config.archive.enabled === false)) {
     const perPage = config.archive_generator.per_page;
     let result = [];
 
-    if (!allPosts.length) return;
+    if (!allPosts.length){ return; }
 
-    if (archiveDir[archiveDir.length - 1] !== '/') archiveDir += '/';
+    if (archiveDir[archiveDir.length - 1] !== '/'){ archiveDir += '/'; }
 
     function generate(path, posts, options) {
       options = options || {};
@@ -52,7 +52,7 @@ if (!(hexo.config.archive && hexo.config.archive.enabled === false)) {
 
     generate(archiveDir, allPosts);
 
-    if (!config.archive_generator.yearly) return result;
+    if (!config.archive_generator.yearly){ return result; }
 
     const posts = {};
 
@@ -108,12 +108,12 @@ if (!(hexo.config.archive && hexo.config.archive.enabled === false)) {
 
       generate(url, new Query(data[0]), {year: year});
 
-      if (!config.archive_generator.monthly && !config.archive_generator.daily) continue;
+      if (!config.archive_generator.monthly && !config.archive_generator.daily){ continue; }
 
       // Monthly
       for (month = 1; month <= 12; month++) {
         monthData = data[month];
-        if (!monthData.length) continue;
+        if (!monthData.length){ continue; }
         if (config.archive_generator.monthly) {
           generate(url + fmtNum(month) + '/', new Query(monthData), {
             year: year,
@@ -121,12 +121,12 @@ if (!(hexo.config.archive && hexo.config.archive.enabled === false)) {
           });
         }
 
-        if (!config.archive_generator.daily) continue;
+        if (!config.archive_generator.daily){ continue; }
 
         // Daily
         for (let day = 1; day <= 31; day++) {
           const dayData = monthData.day[day];
-          if (!dayData || !dayData.length) continue;
+          if (!dayData || !dayData.length){ continue; }
           generate(url + fmtNum(month) + '/' + fmtNum(day) + '/', new Query(dayData), {
             year: year,
             month: month,
@@ -135,8 +135,6 @@ if (!(hexo.config.archive && hexo.config.archive.enabled === false)) {
         }
       }
     }
-
     return result;
-
   });
 }

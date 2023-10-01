@@ -2,7 +2,7 @@
 
 'use strict';
 
-const path = require('path');
+//const path = require('path');
 const url = require('url');
 
 const fmtNum = num => {
@@ -16,9 +16,7 @@ hexo.extend.filter.register('template_locals', locals => {
   const { i18n } = hexo.theme;
 
   var pangu = theme.pangu ? require('pangu') : {
-    spacing: data => {
-      return data;
-    }
+    spacing: data => { return data; }
   };
 
   // Language & Config

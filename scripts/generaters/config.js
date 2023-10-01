@@ -13,7 +13,7 @@ hexo.extend.filter.register('before_generate', () => {
   const data = hexo.locals.get('data');
 
   if (data.languages) {
-    const { language } = hexo.config;
+//    const { language } = hexo.config;
     const { i18n } = hexo.theme;
 
     const mergeLang = lang => {
@@ -26,18 +26,18 @@ hexo.extend.filter.register('before_generate', () => {
     }
   }
 
-  hexo.theme.config.style = {}
+  hexo.theme.config.style = {};
 
   for (const style of ['iconfont', 'colors', 'custom']) {
-    var custom_file = 'source/_data/'+style+'.styl'
+    var custom_file = 'source/_data/'+style+'.styl';
     if (fs.existsSync(custom_file)) {
-      hexo.theme.config.style[style] = path.resolve(hexo.base_dir, custom_file)
+      hexo.theme.config.style[style] = path.resolve(hexo.base_dir, custom_file);
     }
   }
 
   if (data.images && data.images.length > 6) {
-    hexo.theme.config.image_list = data.images
+    hexo.theme.config.image_list = data.images;
   } else {
-    hexo.theme.config.image_list = yaml.load(fs.readFileSync(path.join(__dirname, '../../_images.yml')))
+    hexo.theme.config.image_list = yaml.load(fs.readFileSync(path.join(__dirname, '../../_images.yml')));
   }
 })

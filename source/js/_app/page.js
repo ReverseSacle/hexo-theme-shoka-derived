@@ -1,50 +1,48 @@
 const cardActive = function() {
-  if(!$('.index.wrap'))
-    return
+  if(!$('.index.wrap')){ return; }
 
   if (!window.IntersectionObserver) {
     $.each('.index.wrap article.item, .index.wrap section.item', function(article) {
       if( article.hasClass("show") === false){
-          article.addClass("show");
+        article.addClass("show");
       }
     })
   } else {
     var io = new IntersectionObserver(function(entries) {
-
         entries.forEach(function(article) {
           if (article.target.hasClass("show")) {
-            io.unobserve(article.target)
+            io.unobserve(article.target);
           } else {
             if (article.isIntersecting || article.intersectionRatio > 0) {
               article.target.addClass("show");
               io.unobserve(article.target);
             }
           }
-        })
+        });
     }, {
         root: null,
         threshold: [0.3]
     });
 
     $.each('.index.wrap article.item, .index.wrap section.item', function(article) {
-      io.observe(article)
+      io.observe(article);
     })
 
-    $('.index.wrap .item:first-child').addClass("show")
+    $('.index.wrap .item:first-child').addClass("show");
   }
 
   $.each('.cards .item', function(element, index) {
     ['mouseenter', 'touchstart'].forEach(function(item){
       element.addEventListener(item, function(event) {
         if($('.cards .item.active')) {
-          $('.cards .item.active').removeClass('active')
+          $('.cards .item.active').removeClass('active');
         }
-        element.addClass('active')
+        element.addClass('active');
       })
     });
     ['mouseleave'].forEach(function(item){
       element.addEventListener(item, function(event) {
-        element.removeClass('active')
+        element.removeClass('active');
       })
     });
   });
@@ -80,7 +78,7 @@ const postFancybox = function(p) {
         box.className = 'gallery';
         box.attr('data-height', element.attr('data-height')||220);
 
-        box.innerHTML = element.innerHTML.replace(/<br>/g, "")
+        box.innerHTML = element.innerHTML.replace(/<br>/g, "");
 
         element.parentNode.insertBefore(box, element);
         element.remove();
@@ -91,12 +89,12 @@ const postFancybox = function(p) {
         var info, captionClass = 'image-info';
         if(!$image.is('a img')) {
           var imageLink = $image.attr('data-src') || $image.attr('src');
-          $image.data('safe-src', imageLink)
+          $image.data('safe-src', imageLink);
           var $imageWrapLink = $image.wrap('<a class="fancybox" href="'+imageLink+'" itemscope itemtype="http://schema.org/ImageObject" itemprop="url"></a>').parent('a');
           if (!$image.is('.gallery img')) {
             $imageWrapLink.attr('data-fancybox', 'default').attr('rel', 'default');
           } else {
-            captionClass = 'jg-caption'
+            captionClass = 'jg-caption';
           }
         }
         if(info = element.attr('title')) {
@@ -133,32 +131,31 @@ const postFancybox = function(p) {
 const postBeauty = function () {
   loadComments();
 
-  if(!$('.md'))
-    return
+  if(!$('.md')){ return; }
 
   postFancybox('.post.block');
 
   $('.post.block').oncopy = function(event) {
-    showtip(LOCAL.copyright)
+    showtip(LOCAL.copyright);
 
     if(LOCAL.nocopy) {
-      event.preventDefault()
-      return
+      event.preventDefault();
+      return;
     }
 
-    var copyright = $('#copyright')
+    var copyright = $('#copyright');
     if(window.getSelection().toString().length > 30 && copyright) {
       event.preventDefault();
-      var author = "# " + copyright.child('.author').innerText
-      var link = "# " + copyright.child('.link').innerText
-      var license = "# " + copyright.child('.license').innerText
-      var htmlData = author + "<br>" + link + "<br>" + license + "<br><br>" + window.getSelection().toString().replace(/\r\n/g, "<br>");;
+      var author = "# " + copyright.child('.author').innerText;
+      var link = "# " + copyright.child('.link').innerText;
+      var license = "# " + copyright.child('.license').innerText;
+      var htmlData = author + "<br>" + link + "<br>" + license + "<br><br>" + window.getSelection().toString().replace(/\r\n/g, "<br>");
       var textData = author + "\n" + link + "\n" + license + "\n\n" + window.getSelection().toString().replace(/\r\n/g, "\n");
       if (event.clipboardData) {
-          event.clipboardData.setData("text/html", htmlData);
-          event.clipboardData.setData("text/plain", textData);
+        event.clipboardData.setData("text/html", htmlData);
+        event.clipboardData.setData("text/plain", textData);
       } else if (window.clipboardData) {
-          return window.clipboardData.setData("text", textData);
+        return window.clipboardData.setData("text", textData);
       }
     }
   }
@@ -172,7 +169,7 @@ const postBeauty = function () {
   })
 
   $.each('ol[start]', function(element) {
-    element.style.counterReset = "counter " + parseInt(element.attr('start') - 1)
+    element.style.counterReset = "counter " + parseInt(element.attr('start') - 1);
   })
 
   $.each('.md table', function (element) {
@@ -182,7 +179,7 @@ const postBeauty = function () {
   });
 
   $.each('.highlight > .table-container', function (element) {
-    element.className = 'code-container'
+    element.className = 'code-container';
   });
 
   $.each('figure.highlight', function (element) {
@@ -194,14 +191,14 @@ const postBeauty = function () {
 
     var copyBtn = element.child('.copy-btn');
     if(LOCAL.nocopy) {
-      copyBtn.remove()
+      copyBtn.remove();
     } else {
       copyBtn.addEventListener('click', function (event) {
         var target = event.currentTarget;
         var comma = '', code = '';
         code_container.find('pre').forEach(function(line) {
           code += comma + line.innerText;
-          comma = '\n'
+          comma = '\n';
         })
 
         clipBoard(code, function(result) {
@@ -237,11 +234,11 @@ const postBeauty = function () {
       fullscreenBtn.child('.ic').className = 'ic i-expand';
     }
     var fullscreenHandle = function(event) {
-      var target = event.currentTarget;
+//      var target = event.currentTarget;
       if (element.hasClass('fullscreen')) {
         removeFullscreen();
         hideCode && hideCode();
-        pageScroll(element)
+        pageScroll(element);
       } else {
         element.addClass('fullscreen');
         BODY.addClass('fullscreen');
@@ -259,22 +256,22 @@ const postBeauty = function () {
       var showBtn = code_container.child('.show-btn');
 
       var showCode = function() {
-        code_container.style.maxHeight = ""
-        showBtn.addClass('open')
+        code_container.style.maxHeight = "";
+        showBtn.addClass('open');
       }
 
       var hideCode = function() {
-        code_container.style.maxHeight = "300px"
-        showBtn.removeClass('open')
+        code_container.style.maxHeight = "300px";
+        showBtn.removeClass('open');
       }
 
       showBtn.addEventListener('click', function(event) {
         if (showBtn.hasClass('open')) {
-          removeFullscreen()
-          hideCode()
-          pageScroll(code_container)
+          removeFullscreen();
+          hideCode();
+          pageScroll(code_container);
         } else {
-          showCode()
+          showCode();
         }
       });
     }
@@ -283,13 +280,13 @@ const postBeauty = function () {
   $.each('.reward button', function (element) {
     element.addEventListener('click', function (event) {
       event.preventDefault();
-      var qr = $('#qr')
+      var qr = $('#qr');
       if(qr.display() === 'inline-flex') {
-        transition(qr, 0)
+        transition(qr, 0);
       } else {
         transition(qr, 1, function() {
-          qr.display('inline-flex')
-        }) // slideUpBigIn
+          qr.display('inline-flex');
+        }); // slideUpBigIn
       }
     });
   });
@@ -298,50 +295,49 @@ const postBeauty = function () {
   $.each('.quiz > ul.options li', function (element) {
     element.addEventListener('click', function (event) {
       if (element.hasClass('correct')) {
-        element.toggleClass('right')
-        element.parentNode.parentNode.addClass('show')
+        element.toggleClass('right');
+        element.parentNode.parentNode.addClass('show');
       } else {
-        element.toggleClass('wrong')
+        element.toggleClass('wrong');
       }
     });
   });
 
   $.each('.quiz > p', function (element) {
     element.addEventListener('click', function (event) {
-      element.parentNode.toggleClass('show')
+      element.parentNode.toggleClass('show');
     });
   });
 
   $.each('.quiz > p:first-child', function (element) {
     var quiz = element.parentNode;
-    var type = 'choice'
+    var type = 'choice';
     if(quiz.hasClass('true') || quiz.hasClass('false'))
-      type = 'true_false'
+      type = 'true_false';
     if(quiz.hasClass('multi'))
-      type = 'multiple'
+      type = 'multiple';
     if(quiz.hasClass('fill'))
-      type = 'gap_fill'
+      type = 'gap_fill';
     if(quiz.hasClass('essay'))
-      type = 'essay'
-    element.attr('data-type', LOCAL.quiz[type])
+      type = 'essay';
+    element.attr('data-type', LOCAL.quiz[type]);
   });
 
   $.each('.quiz .mistake', function (element) {
-    element.attr('data-type', LOCAL.quiz.mistake)
+    element.attr('data-type', LOCAL.quiz.mistake);
   });
 
   $.each('div.tags a', function(element) {
-    element.className = ['primary', 'success', 'info', 'warning', 'danger'][Math.floor(Math.random() * 5)]
+    element.className = ['primary', 'success', 'info', 'warning', 'danger'][Math.floor(Math.random() * 5)];
   })
 
 }
 
 const tabFormat = function() {
   // tab
-  var first_tab
+  var first_tab;
   $.each('div.tab', function(element, index) {
-    if(element.attr('data-ready'))
-      return
+    if(element.attr('data-ready')){ return; }
 
     var id = element.attr('data-id');
     var title = element.attr('data-title');
@@ -350,11 +346,11 @@ const tabFormat = function() {
       box = document.createElement('div');
       box.className = 'tabs';
       box.id = id;
-      box.innerHTML = '<div class="show-btn"></div>'
+      box.innerHTML = '<div class="show-btn"></div>';
 
       var showBtn = box.child('.show-btn');
       showBtn.addEventListener('click', function(event) {
-        pageScroll(box)
+        pageScroll(box);
       });
 
       element.parentNode.insertBefore(box, element);
@@ -390,17 +386,17 @@ const tabFormat = function() {
     });
 
     box.appendChild(element);
-    element.attr('data-ready', true)
+    element.attr('data-ready', true);
   });
 }
 
 const loadComments = function () {
   var element = $('#comments');
   if (!element) {
-    goToComment.display("none")
+    goToComment.display("none");
     return;
   } else {
-    goToComment.display("")
+    goToComment.display("");
   }
 
   if (!window.IntersectionObserver) {
@@ -420,8 +416,7 @@ const loadComments = function () {
 }
 
 const algoliaSearch = function(pjax) {
-  if(CONFIG.search === null)
-    return
+  if(CONFIG.search === null){ return; }
 
   if(!siteSearch) {
     siteSearch = BODY.createChild('div', {
@@ -435,9 +430,7 @@ const algoliaSearch = function(pjax) {
     searchClient  : algoliasearch(CONFIG.search.appID, CONFIG.search.apiKey),
     searchFunction: function(helper) {
       var searchInput = $('.search-input');
-      if (searchInput.value) {
-        helper.search();
-      }
+      if (searchInput.value) { helper.search(); }
     }
   });
 
@@ -522,7 +515,7 @@ const algoliaSearch = function(pjax) {
       document.body.style.overflow = 'hidden';
       transition(siteSearch, 'shrinkIn', function() {
           $('.search-input').focus();
-        }) // transition.shrinkIn
+      }); // transition.shrinkIn
     });
   });
 

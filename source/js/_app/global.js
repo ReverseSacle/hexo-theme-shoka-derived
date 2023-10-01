@@ -1,4 +1,4 @@
-var statics = CONFIG.statics.indexOf('//') > 0 ? CONFIG.statics : CONFIG.root
+var statics = CONFIG.statics.indexOf('//') > 0 ? CONFIG.statics : CONFIG.root;
 var scrollAction = { x: 'undefined', y: 'undefined' };
 var diffY = 0;
 var originTitle, titleTime;
@@ -36,26 +36,23 @@ const Loader = {
     Loader.lock = false;
   },
   hide: function(sec) {
-    if(!CONFIG.loader.start)
-      sec = -1
+    if(!CONFIG.loader.start){ sec = -1; }
     this.timer = setTimeout(this.vanish, sec||3000);
   },
   vanish: function() {
-    if(Loader.lock)
-      return;
-    if(CONFIG.loader.start)
-      transition(loadCat, 0)
+    if(Loader.lock){ return; }
+    if(CONFIG.loader.start){ transition(loadCat, 0); }
     document.body.addClass('loaded');
     Loader.lock = true;
   }
 }
 
 const changeTheme = function(type) {
-  var btn = $('.theme .ic')
+  var btn = $('.theme .ic');
   if(type == 'dark') {
     HTML.attr('data-theme', type);
-    btn.removeClass('i-sun')
-    btn.addClass('i-moon')
+    btn.removeClass('i-sun');
+    btn.addClass('i-moon');
   } else {
     HTML.attr('data-theme', null);
     btn.removeClass('i-moon');
@@ -64,19 +61,15 @@ const changeTheme = function(type) {
 }
 
 const changeMetaTheme = function(color) {
-  if(HTML.attr('data-theme') == 'dark')
-    color = '#222'
+  if(HTML.attr('data-theme') == 'dark'){ color = '#222'; }
 
   $('meta[name="theme-color"]').attr('content', color);
 }
 
 const themeColorListener = function () {
   window.matchMedia('(prefers-color-scheme: dark)').addListener(function(mediaQueryList) {
-    if(mediaQueryList.matches){
-      changeTheme('dark');
-    } else {
-      changeTheme();
-    }
+    if(mediaQueryList.matches){ changeTheme('dark'); } 
+    else { changeTheme(); }
   });
 
   var t = store.get('theme');
@@ -89,7 +82,7 @@ const themeColorListener = function () {
   }
 
   $('.theme').addEventListener('click', function(event) {
-    var btn = event.currentTarget.child('.ic')
+    var btn = event.currentTarget.child('.ic');
 
     var neko = BODY.createChild('div', {
       id: 'neko',
@@ -101,7 +94,7 @@ const themeColorListener = function () {
           delay: 2500,
           opacity: 0
         }, function() {
-          BODY.removeChild(neko)
+          BODY.removeChild(neko);
         });
     }
 
@@ -122,7 +115,7 @@ const themeColorListener = function () {
         }
     }
     transition(neko, 1, function() {
-      setTimeout(c, 210)
+      setTimeout(c, 210);
     })
   });
 }
@@ -133,26 +126,23 @@ const visibilityListener = function () {
       case 'hidden':
         $('[rel="icon"]').attr('href', statics + CONFIG.favicon.hidden);
         document.title = LOCAL.favicon.hide;
-        if(CONFIG.loader.switch)
-          Loader.show()
+        if(CONFIG.loader.switch){ Loader.show(); }
         clearTimeout(titleTime);
-      break;
+        break;
       case 'visible':
         $('[rel="icon"]').attr('href', statics + CONFIG.favicon.normal);
         document.title = LOCAL.favicon.show;
-        if(CONFIG.loader.switch)
-          Loader.hide(1000)
+        if(CONFIG.loader.switch){ Loader.hide(1000); }
         titleTime = setTimeout(function () {
           document.title = originTitle;
         }, 2000);
-      break;
+        break;
     }
   });
 }
 
 const showtip = function(msg) {
-  if(!msg)
-    return
+  if(!msg){ return; }
 
   var tipbox = BODY.createChild('div', {
     innerHTML: msg,
@@ -160,7 +150,7 @@ const showtip = function(msg) {
   });
 
   setTimeout(function() {
-    tipbox.addClass('hide')
+    tipbox.addClass('hide');
     setTimeout(function() {
       BODY.removeChild(tipbox);
     }, 300);
@@ -172,12 +162,11 @@ const resizeHandle = function (event) {
   headerHightInner = siteHeader.height();
   headerHight = headerHightInner + $('#waves').height();
 
-  if(oWinWidth != window.innerWidth)
-    sideBarToggleHandle(null, 1);
+  if(oWinWidth != window.innerWidth){ sideBarToggleHandle(null, 1); }
 
   oWinHeight = window.innerHeight;
   oWinWidth = window.innerWidth;
-  sideBar.child('.panels').height(oWinHeight + 'px')
+  sideBar.child('.panels').height(oWinHeight + 'px');
 }
 
 const scrollHandle = function (event) {
@@ -187,11 +176,8 @@ const scrollHandle = function (event) {
   var SHOW = window.pageYOffset > headerHightInner;
   var startScroll = window.pageYOffset > 0;
 
-  if (SHOW) {
-    changeMetaTheme('#FFF');
-  } else {
-    changeMetaTheme('#222');
-  }
+  if (SHOW) { changeMetaTheme('#FFF'); } 
+  else { changeMetaTheme('#222'); }
 
   siteNav.toggleClass('show', SHOW);
   toolBtn.toggleClass('affix', startScroll);
@@ -213,11 +199,11 @@ const scrollHandle = function (event) {
   //} else
   if (diffY < 0) {
     // Scroll down
-    siteNav.removeClass('up')
+    siteNav.removeClass('up');
     siteNav.toggleClass('down', SHOW);
   } else if (diffY > 0) {
     // Scroll up
-    siteNav.removeClass('down')
+    siteNav.removeClass('down');
     siteNav.toggleClass('up', SHOW);
   } else {
     // First scroll event
@@ -231,23 +217,19 @@ const scrollHandle = function (event) {
 }
 
 const pagePosition = function() {
-  if(CONFIG.auto_scroll)
-    store.set(LOCAL_URL, scrollAction.y)
+  if(CONFIG.auto_scroll){ store.set(LOCAL_URL, scrollAction.y); }
 }
 
 const positionInit = function(comment) {
-  var anchor = window.location.hash
+  var anchor = window.location.hash;
   var target = null;
   if(LOCAL_HASH) {
     store.del(LOCAL_URL);
-    return
+    return;
   }
 
-  if(anchor)
-    target = $(decodeURI(anchor))
-  else {
-    target = CONFIG.auto_scroll ? parseInt(store.get(LOCAL_URL)) : 0
-  }
+  if(anchor){ target = $(decodeURI(anchor)); }
+  else{ target = CONFIG.auto_scroll ? parseInt(store.get(LOCAL_URL)) : 0; }
 
   if(target) {
     pageScroll(target);

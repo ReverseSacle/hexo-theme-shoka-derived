@@ -4,10 +4,8 @@ const nunjucks = require('nunjucks');
 const path = require('path');
 
 const pangu = require('pangu') || {
-    spacing: data => {
-      return data;
-    }
-  };
+    spacing: data => { return data; }
+};
 
 function njkCompile(data) {
   const templateDir = path.dirname(data.path);

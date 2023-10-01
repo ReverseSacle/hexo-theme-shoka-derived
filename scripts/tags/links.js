@@ -23,9 +23,7 @@ const url = require('url');
 function linkGrid(args, content) {
   const theme = hexo.theme.config;
 
-  if(!args[0] && !content) {
-    return
-  }
+  if(!args[0] && !content) { return; }
 
   if(args[0]) {
     const filepath = path.join(hexo.source_dir, args[0]);
@@ -34,26 +32,20 @@ function linkGrid(args, content) {
     }
   }
 
-  if (!content) {
-    return
-  }
+  if (!content) { return; }
 
   const siteHost = url.parse(hexo.config.url).hostname || hexo.config.url;
 
   const list = yaml.load(content);
 
-  var result = ''
+  var result = '';
 
   list.forEach(item => {
-    if(!item.url || !item.site) {
-      return;
-    }
+    if(!item.url || !item.site) { return; }
 
     var urlparam = {};
 
-    if(item.url) {
-      urlparam = url.parse(item.url);
-    }
+    if(item.url) { urlparam = url.parse(item.url); }
 
     var item_image = item.image || theme.images + '/404.png';
 
@@ -82,8 +74,7 @@ function linkGrid(args, content) {
   });
 
   return `<div class="links">${result}</div>`;
-
 }
 
 hexo.extend.tag.register('links', linkGrid, {ends: true});
-hexo.extend.tag.register('linksfile', linkGrid, {ends: false, async: true})
+hexo.extend.tag.register('linksfile', linkGrid, {ends: false, async: true});

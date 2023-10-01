@@ -26,7 +26,7 @@ const domInit = function() {
 }
 
 const pjaxReload = function () {
-  pagePosition()
+  pagePosition();
 
   if(sideBar.hasClass('on')) {
     transition(sideBar, function () {
@@ -35,14 +35,14 @@ const pjaxReload = function () {
       }); // 'transition.slideRightOut'
   }
 
-  $('#main').innerHTML = ''
+  $('#main').innerHTML = '';
   $('#main').appendChild(loadCat.lastChild.cloneNode(true));
   pageScroll(0);
 }
 
 const siteRefresh = function (reload) {
-  LOCAL_HASH = 0
-  LOCAL_URL = window.location.href
+  LOCAL_HASH = 0;
+  LOCAL_URL = window.location.href;
 
   vendorCss('katex');
   vendorJs('copy_tex');
@@ -67,33 +67,33 @@ const siteRefresh = function (reload) {
     $.each('script[data-pjax]', pjaxScript);
   }
 
-  originTitle = document.title
+  originTitle = document.title;
 
-  resizeHandle()
+  resizeHandle();
 
-  menuActive()
+  menuActive();
 
-  sideBarTab()
-  sidebarTOC()
+  sideBarTab();
+  sidebarTOC();
 
-  registerExtURL()
-  postBeauty()
-  tabFormat()
+  registerExtURL();
+  postBeauty();
+  tabFormat();
 
-  Loader.hide()
+  Loader.hide();
 
   setTimeout(function(){
-    positionInit()
+    positionInit();
   }, 500);
 
-  cardActive()
+  cardActive();
 
-  lazyload.observe()
+  lazyload.observe();
 }
 
 const siteInit = function () {
 
-  domInit()
+  domInit();
 
   pjax = new Pjax({
             selectors: [
@@ -104,31 +104,27 @@ const siteInit = function () {
             ],
             analytics: false,
             cacheBust: false
-          })
+          });
 
-  CONFIG.quicklink.ignores = LOCAL.ignores
-  quicklink.listen(CONFIG.quicklink)
+  CONFIG.quicklink.ignores = LOCAL.ignores;
+  quicklink.listen(CONFIG.quicklink);
 
-  visibilityListener()
-  themeColorListener()
+  visibilityListener();
+  themeColorListener();
 
-  algoliaSearch(pjax)
+  algoliaSearch(pjax);
 
-  window.addEventListener('scroll', scrollHandle)
-
-  window.addEventListener('resize', resizeHandle)
-
-  window.addEventListener('pjax:send', pjaxReload)
-
-  window.addEventListener('pjax:success', siteRefresh)
-
+  window.addEventListener('scroll', scrollHandle);
+  window.addEventListener('resize', resizeHandle);
+  window.addEventListener('pjax:send', pjaxReload);
+  window.addEventListener('pjax:success', siteRefresh);
   window.addEventListener('beforeunload', function() {
-    pagePosition()
+    pagePosition();
   })
 
-  siteRefresh(1)
+  siteRefresh(1);
 }
 
 window.addEventListener('DOMContentLoaded', siteInit);
 
-console.log('%c Theme.Shoka v' + CONFIG.version + ' %c https://shoka.lostyu.me/ ', 'color: white; background: #e9546b; padding:5px 0;', 'padding:4px;border:1px solid #e9546b;')
+console.log('%c Theme.Shoka v' + CONFIG.version + ' %c https://shoka.lostyu.me/ ', 'color: white; background: #e9546b; padding:5px 0;', 'padding:4px;border:1px solid #e9546b;');

@@ -5,11 +5,11 @@ const { htmlTag, url_for } = require('hexo-util');
 const theme_env = require('../../package.json');
 
 hexo.extend.helper.register('hexo_env', function (type) {
-  return this.env[type]
+  return this.env[type];
 })
 
 hexo.extend.helper.register('theme_env', function (type) {
-  return theme_env[type]
+  return theme_env[type];
 })
 
 // Optional code for google font
@@ -44,22 +44,20 @@ hexo.extend.helper.register('_vendor_font', () => {
 hexo.extend.helper.register('_vendor_js', () => {
   const all_config = hexo.theme.config;
   const config = all_config.vendors.js;
-  if (!config) return '';
+  if (!config){ return ''; }
 
   //Get a font list from config
-  const vendors_option = ['pace', 'pjax', 'anime', 'algolia', 'instantsearch', 'lazyload', 'quicklink'];
   var Js_mix = [];
   var jsdelivr_url = "";
   
-  for(var i = 0;i < vendors_option.length;++i)
-  {
-    const url_path = config[vendors_option[i]];
+  ['pace', 'pjax', 'anime', 'algolia', 'instantsearch', 'lazyload', 'quicklink'].forEach(item => {
+    let url_path = config[item];
     if(url_path.length)
     {
       if(-1 == url_path.indexOf("npm")){ Js_mix.push(url_path); }
       else{ jsdelivr_url += jsdelivr_url ? ("," + url_path) : url_path; }
     }
-  }
+  });
 
   if(jsdelivr_url.length)
   {
