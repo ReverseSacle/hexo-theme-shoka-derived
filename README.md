@@ -1,7 +1,7 @@
 # hexo-theme-shoka-derived
 ## Usage
 
-1. Clone this repository
+1. Clone this repository.
 
    ```bash
    # cd your_blog_root_path
@@ -106,6 +106,32 @@
            enable: true
            template: "themes/shoka/layout/_alternate/json.ejs"
            output: "feed.json"
+   
+   minify:
+     html:
+       enable: true
+       exclude: # 排除 hexo-feed 用到的模板文件
+         - '**/json.ejs'
+         - '**/atom.ejs'
+         - '**/rss.ejs'
+     css:
+       enable: true
+       exclude:
+         - '**/*.min.css'
+     js:
+       enable: true
+       mangle:
+         toplevel: true
+       output:
+       compress:
+       exclude:
+         - '**/*.min.js'
    ```
 
-   
+## Modification
+
++ Delete `SEO` setting
++ Delete `Mermaid` plugin
++ Delete `media` plugin
++ Delete the `fireworks` effect
++ Remove the subtitle in the title
