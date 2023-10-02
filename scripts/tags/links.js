@@ -75,7 +75,7 @@ function linkGrid(args, content) {
   });
 
   return `<div class="links">${result}</div>`;
-}
+};
 
 hexo.extend.tag.register('links', linkGrid, {ends: true});
 hexo.extend.tag.register('linksfile', linkGrid, {ends: false, async: true});

@@ -104,7 +104,6 @@ hexo.extend.helper.register('_category_prev', function(name) {
   return result;
 });
 
-
 hexo.extend.helper.register('_category_posts', function(page) {
   let hexo = this;
   let categories = hexo.site.categories;

@@ -23,7 +23,7 @@ const domInit = function() {
   backToTop.addEventListener('click', backToTopHandle);
   goToComment.addEventListener('click', goToCommentHandle);
   showContents.addEventListener('click', sideBarToggleHandle);
-}
+};
 
 const pjaxReload = function() {
   pagePosition();
@@ -38,7 +38,7 @@ const pjaxReload = function() {
   $('#main').innerHTML = '';
   $('#main').appendChild(loadCat.lastChild.cloneNode(true));
   pageScroll(0);
-}
+};
 
 const siteRefresh = function(reload) {
   LOCAL_HASH = 0;
@@ -89,7 +89,7 @@ const siteRefresh = function(reload) {
   cardActive();
 
   lazyload.observe();
-}
+};
 
 const siteInit = function() {
 
@@ -122,7 +122,7 @@ const siteInit = function() {
     pagePosition();
   })
   siteRefresh(1);
-}
+};
 
 window.addEventListener('DOMContentLoaded', siteInit);
 console.log('%c Theme.Shoka.Derived v' + CONFIG.version + ' ', 'color: white; background: #e9546b; padding:5px 0;');

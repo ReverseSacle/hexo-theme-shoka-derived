@@ -31,11 +31,11 @@ function njkCompile(data) {
   });
 
   return nunjucks.compile(data.text, env, data.path);
-}
+};
 
 function njkRenderer(data, locals) {
   return njkCompile(data).render(locals);
-}
+};
 
 // Return a compiled renderer.
 njkRenderer.compile = function(data) {

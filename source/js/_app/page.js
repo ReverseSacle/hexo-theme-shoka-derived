@@ -47,7 +47,7 @@ const cardActive = function() {
       })
     });
   });
-}
+};
 
 const registerExtURL = function() {
   $.each('span.exturl', function(element) {
@@ -66,7 +66,7 @@ const registerExtURL = function() {
       }
       element.parentNode.replaceChild(link, element);
     });
-}
+};
 
 const postFancybox = function(p) {
   if($(p + ' .md img')) {
@@ -128,7 +128,7 @@ const postFancybox = function(p) {
       });
     }, window.jQuery);
   }
-}
+};
 
 const postBeauty = function() {
   loadComments();
@@ -333,7 +333,7 @@ const postBeauty = function() {
     element.className = ['primary', 'success', 'info', 'warning', 'danger'][Math.floor(Math.random() * 5)];
   })
 
-}
+};
 
 const tabFormat = function() {
   // tab
@@ -391,7 +391,7 @@ const tabFormat = function() {
     box.appendChild(element);
     element.attr('data-ready', true);
   });
-}
+};
 
 const loadComments = function() {
   var element = $('#comments');
@@ -416,7 +416,7 @@ const loadComments = function() {
 
     io.observe(element);
   }
-}
+};
 
 const algoliaSearch = function(pjax) {
   if(CONFIG.search === null){ return; }
@@ -540,4 +540,4 @@ const algoliaSearch = function(pjax) {
       onPopupClose();
     }
   });
-}
+};

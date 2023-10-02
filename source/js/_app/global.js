@@ -22,10 +22,8 @@ var oWinWidth = window.innerWidth;
 var LOCAL_HASH = 0, LOCAL_URL = window.location.href;
 var pjax;
 const lazyload = lozad('img, [data-background-image]', {
-    loaded: function(el) {
-        el.addClass('lozaded');
-    }
-})
+    loaded: function(el) { el.addClass('lozaded'); }
+});
 
 const Loader = {
   timer: null,
@@ -46,7 +44,7 @@ const Loader = {
     document.body.addClass('loaded');
     Loader.lock = true;
   }
-}
+};
 
 const changeTheme = function(type) {
   var btn = $('.theme .ic');
@@ -59,13 +57,13 @@ const changeTheme = function(type) {
     btn.removeClass('i-moon');
     btn.addClass('i-sun');
   }
-}
+};
 
 const changeMetaTheme = function(color) {
   if(HTML.attr('data-theme') == 'dark'){ color = '#222'; }
 
   $('meta[name="theme-color"]').attr('content', color);
-}
+};
 
 const themeColorListener = function() {
   window.matchMedia('(prefers-color-scheme: dark)').addListener(function(mediaQueryList) {
@@ -119,7 +117,7 @@ const themeColorListener = function() {
       setTimeout(c, 210);
     })
   });
-}
+};
 
 const visibilityListener = function() {
   document.addEventListener('visibilitychange', function() {
@@ -140,7 +138,7 @@ const visibilityListener = function() {
         break;
     }
   });
-}
+};
 
 const showtip = function(msg) {
   if(!msg){ return; }
@@ -156,7 +154,7 @@ const showtip = function(msg) {
       BODY.removeChild(tipbox);
     }, 300);
   }, 3000);
-}
+};
 
 const resizeHandle = function(event) {
   siteNavHeight = siteNav.height();
@@ -168,7 +166,7 @@ const resizeHandle = function(event) {
   oWinHeight = window.innerHeight;
   oWinWidth = window.innerWidth;
   sideBar.child('.panels').height(oWinHeight + 'px');
-}
+};
 
 const scrollHandle = function(event) {
   var winHeight = window.innerHeight;
@@ -215,11 +213,11 @@ const scrollHandle = function(event) {
   var scrollPercent = Math.round(Math.min(100 * window.pageYOffset / contentVisibilityHeight, 100)) + '%';
   backToTop.child('span').innerText = scrollPercent;
   $('.percent').width(scrollPercent);
-}
+};
 
 const pagePosition = function() {
   if(CONFIG.auto_scroll){ store.set(LOCAL_URL, scrollAction.y); }
-}
+};
 
 const positionInit = function(comment) {
   var anchor = window.location.hash;
@@ -242,7 +240,7 @@ const positionInit = function(comment) {
     LOCAL_HASH = 1;
   }
 
-}
+};
 
 const clipBoard = function(str, callback) {
   var ta = BODY.createChild('textarea', {
@@ -268,5 +266,5 @@ const clipBoard = function(str, callback) {
     selection.addRange(selected);
   }
   BODY.removeChild(ta);
-}
+};
 

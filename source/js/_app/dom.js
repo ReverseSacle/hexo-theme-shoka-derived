@@ -13,7 +13,7 @@ $.all = function(selector, element) {
 
 $.each = function(selector, callback, element) {
   return $.all(selector, element).forEach(callback);
-}
+};
 
 
 Object.assign(HTMLElement.prototype, {

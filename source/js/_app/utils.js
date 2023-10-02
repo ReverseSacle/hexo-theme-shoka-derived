@@ -1,10 +1,10 @@
 const getRndInteger = function(min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
-}
+};
 
 const getDocHeight = function() {
   return $('main > .inner').offsetHeight;
-}
+};
 
 const getScript = function(url, callback, condition) {
   if (condition) { callback(); } 
@@ -22,18 +22,18 @@ const getScript = function(url, callback, condition) {
     script.src = url;
     document.head.appendChild(script);
   }
-}
+};
 
 const assetUrl = function(asset, type) {
   const str = CONFIG[asset][type];
   if(-1 != str.indexOf('npm') || -1 != str.indexOf('gh') || -1 != str.indexOf('combine'))
     return "//cdn.jsdelivr.net/" + str;
 
-  if(str.indexOf('http')>-1){ return str; }
+  if(-1 != str.indexOf('http')){ return str; }
 
   // statics + str
-  return (CONFIG.statics.indexOf('//') > 0 ? CONFIG.statics : CONFIG.root) + str;
-}
+  return CONFIG.statics + str;
+};
 
 const vendorJs = function(type, callback, condition) {
   if(LOCAL[type]) {
@@ -41,7 +41,8 @@ const vendorJs = function(type, callback, condition) {
       window[type] = true;
     }, condition || window[type]);
   }
-}
+};
+
 //function(type, condition)
 const vendorCss = function(type) {
   if(window['css'+type]){ return; }
@@ -54,7 +55,7 @@ const vendorCss = function(type) {
 
     window['css'+type] = true;
   }
-}
+};
 
 const pjaxScript = function(element) {
   const code = element.text || element.textContent || element.innerHTML || '';
@@ -77,7 +78,7 @@ const pjaxScript = function(element) {
     script.appendChild(document.createTextNode(code));
   }
   parent.appendChild(script);
-}
+};
 
 const pageScroll = function(target, offset, complete) {
   const opt = {
@@ -88,7 +89,7 @@ const pageScroll = function(target, offset, complete) {
     complete: function() { complete && complete(); }
   }
   anime(opt);
-}
+};
 
 const transition = function(target, type, complete) {
   var animation = {};
@@ -155,17 +156,13 @@ const transition = function(target, type, complete) {
       target.display(display);
       complete && complete();
   });
-}
+};
 
 const store = {
-  get: function(item) {
-    return localStorage.getItem(item);
-  },
+  get: function(item) { return localStorage.getItem(item); },
   set: function(item, str) {
     localStorage.setItem(item, str);
     return str;
   },
-  del: function(item) {
-    localStorage.removeItem(item);
-  }
-}
+  del: function(item) { localStorage.removeItem(item); }
+};

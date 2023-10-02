@@ -15,7 +15,7 @@ const sideBarToggleHandle = function(_, force) {
         });
     }
   }
-}
+};
 
 const sideBarTab = function() {
   var sideBarInner = sideBar.child('.inner');
@@ -79,7 +79,7 @@ const sideBarTab = function() {
   } else {
     sideBar.child('.panels').style.paddingTop = '.625rem';
   }
-}
+};
 
 const sidebarTOC = function() {
   var navItems = $.all('.contents li');
@@ -188,19 +188,19 @@ const sidebarTOC = function() {
   }
 
   createIntersectionObserver();
-}
+};
 
 const backToTopHandle = function() {
   pageScroll(0);
-}
+};
 
 const goToBottomHandle = function() {
   pageScroll(parseInt(Container.height()));
-}
+};
 
 const goToCommentHandle = function() {
   pageScroll($('#comments'));
-}
+};
 
 const menuActive = function() {
   $.each('.menu .item:not(.title)', function(element) {
@@ -218,4 +218,4 @@ const menuActive = function() {
       parentItem.removeClass('expand');
     }
   });
-}
+};
