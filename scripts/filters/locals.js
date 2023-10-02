@@ -16,15 +16,13 @@ hexo.extend.filter.register('template_locals', function(locals) {
   const { __, theme } = locals;
   const { i18n } = hexo.theme;
 
-  var pangu = theme.pangu ? require('pangu') : {
-    // data => {}
-    spacing: function(data) { return data; }
-  };
-
+  // data => {}
+  var pangu = { spacing: function(data) { return data; } };
   // Language & Config
   locals.alternate = theme.alternate;
+
   locals.title = pangu.spacing(__('title') !== 'title' ? __('title') : config.title);
-  locals.subtitle = pangu.spacing(__('subtitle') !== 'subtitle' ? __('subtitle') : config.subtitle);
+  locals.subtitle = pangu.spacing(__('subtitle') !== 'subtitle' ? __('subtitle') : config.subtitle);  
   locals.author = __('author') !== 'author' ? __('author') : config.author;
   locals.description = pangu.spacing(__('description') !== 'description' ? __('description') : config.description);
   locals.languages = [...i18n.languages];
@@ -42,9 +40,9 @@ hexo.extend.filter.register('template_locals', function(locals) {
   if (locals.page.categories) {
     // (cat) => {}
     locals.page.categories.map(function(cat) {
-      if(cat.name) {
-        cat.name = locals.page.lastcat = pangu.spacing(cat.name);
-      }
+    if(cat.name) {
+      cat.name = locals.page.lastcat = pangu.spacing(cat.name);
+    }
       return cat;
     })
   }

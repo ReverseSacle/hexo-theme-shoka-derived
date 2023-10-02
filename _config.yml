@@ -1,5 +1,5 @@
 # Alternate site name
-alternate: Yume Shoka
+alternate: Hexo Shoka
 
 open_graph:
   #twitter_id:
@@ -29,12 +29,12 @@ darkmode: false
 
 # By default the page will automatically scroll to the last viewed position
 # if `false`, automatic positioning will be turned off
-auto_scroll: true
+auto_scroll: false
 
 # Whether to show the loading cat
 loader:
   start: true # When entering the page
-  switch: true # When switching to another page
+  switch: false # When switching to another page
 
 font:
   enable: true
@@ -144,7 +144,7 @@ post:
 # Reward (Donate)
 reward:
   # If true, reward will be displayed in every article by default.
-  enable: true
+  enable: false
   account:
     wechatpay: /wechatpay.png
     alipay: /alipay.png
@@ -214,9 +214,6 @@ image_server: # "https://acg.xydwz.cn/api/api.php"
 search:
   hits:
     per_page: 10
-
-# Dependencies: https://github.com/amehime/hexo-renderer-multi-markdown-it
-pangu: false
 
 # Quicklink Support
 # For more information: https://github.com/GoogleChromeLabs/quicklink

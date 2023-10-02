@@ -3,10 +3,8 @@
 const nunjucks = require('nunjucks');
 const path = require('path');
 
-const pangu = require('pangu') || {
-  // data => {}
-  spacing: function(data) { return data; }
-};
+// data => {}
+const pangu = { spacing: function(data) { return data; } };
 
 function njkCompile(data) {
   const templateDir = path.dirname(data.path);
@@ -23,6 +21,7 @@ function njkCompile(data) {
     }
     return '""';
   });
+
   // dictionary => {}
   env.addFilter('pangu', function(dictionary) {
     if (typeof dictionary !== 'undefined' && dictionary !== null) {
@@ -30,6 +29,7 @@ function njkCompile(data) {
     }
     return '""';
   });
+
   return nunjucks.compile(data.text, env, data.path);
 }
 

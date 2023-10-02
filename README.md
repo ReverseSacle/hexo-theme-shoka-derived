@@ -106,27 +106,73 @@
            enable: true
            template: "themes/shoka/layout/_alternate/json.ejs"
            output: "feed.json"
-   
-   minify:
-     html:
-       enable: true
-       exclude: # 排除 hexo-feed 用到的模板文件
-         - '**/json.ejs'
-         - '**/atom.ejs'
-         - '**/rss.ejs'
-     css:
-       enable: true
-       exclude:
-         - '**/*.min.css'
-     js:
-       enable: true
-       mangle:
-         toplevel: true
-       output:
-       compress:
-       exclude:
-         - '**/*.min.js'
    ```
+
+(**Optional**)Using Gulp for cleaning Js, CSS and HTML.
+
+```bash
+# install gulp
+npm install gulp --save-dev
+
+# install gulp plugins
+npm install gulp-clean-css gulp-html-minifier-terser gulp-htmlclean gulp-terser --save-dev
+```
+
+Move to your hexo root dir, and create a new file named `gulp.js`，add following content.
+
+```javascript
+// Dependience
+var gulp = require('gulp');
+var cleanCSS = require('gulp-clean-css');
+var htmlmin = require('gulp-html-minifier-terser');
+var htmlclean = require('gulp-htmlclean');
+var terser = require('gulp-terser');
+
+// Compress js
+gulp.task('compress', () =>
+  gulp.src(['./public/**/*.js', '!./public/**/*.min.js'])
+    .pipe(terser())
+    .pipe(gulp.dest('./public'))
+);
+
+// Compress css
+gulp.task('minify-css', () => {
+    return gulp.src(['./public/**/*.css'])
+        .pipe(cleanCSS({
+            compatibility: 'ie11'
+        }))
+        .pipe(gulp.dest('./public'));
+});
+
+// Compress html
+gulp.task('minify-html', () => {
+    return gulp.src('./public/**/*.html','!./public/**/json.ejs','!./public/**/atom.ejs','!./public/**/rss.ejs')
+        .pipe(htmlclean())
+        .pipe(htmlmin({
+            removeComments: true, // Delete html comments
+            collapseWhitespace: true, // Compress html
+            collapseBooleanAttributes: true,
+            // Ignore the value of bool type, 
+            // example：<input checked="true"/> ==> <input />
+            removeEmptyAttributes: true,
+            // Delete all the space value of attribute, 
+            // example：<input id="" /> ==> <input />
+            removeScriptTypeAttributes: true,
+            // Delete the attribute type="text/javascript" in lable <script>
+            removeStyleLinkTypeAttributes: true,
+            // Delete the attribute type="text/css" in <style> and <link>
+            minifyJS: true, // Compress JS
+            minifyCSS: true, // Compress CSS
+            minifyURLs: true  // Compress URL
+        }))
+        .pipe(gulp.dest('./public'))
+});
+
+// Task command for using gulp command
+gulp.task('default', gulp.parallel(
+  'compress', 'minify-css', 'minify-html'
+));
+```
 
 ## Modification
 

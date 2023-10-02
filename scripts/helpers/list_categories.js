@@ -60,11 +60,8 @@ hexo.extend.helper.register('_categories', function() {
   let categories = hexo.site.categories;
   if (!categories || !categories.length) return '';
 
-  var pangu = hexo.theme.pangu ? require('pangu') : {
-    // data => {}
-    spacing: function(data) { return data; }
-  };
-
+  // data => {}
+  var pangu = { spacing: function(data) { return data; } };
   let result = {};
 
   // (cat, i) => {}
