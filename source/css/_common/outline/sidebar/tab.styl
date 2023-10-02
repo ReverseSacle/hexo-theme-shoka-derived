@@ -16,9 +16,15 @@
     border-radius: .625rem;
     text-align: center;
     text-decoration: none;
-    background-color: rgba(0, 0, 0, .08);
+    background-color: rgba(0, 0, 0, 0.06);
 
     the-transition(.2s, ease-out);
+
+    .submenu {
+      display: none;
+      padding: 0;
+      @extend .slide-down-in;
+    }
 
     &:nth-child(2) {
       margin: auto .625rem;
@@ -33,14 +39,30 @@
       display: inherit;
     }
 
-    &:hover,
-    &.active {
-      @extend $color-btn;
+    &:hover {
+      background-color: rgba(0,0,0,0.1);
+      color: inherit;
+
+      .submenu {
+        display: block;
+      }
     }
 
+    &.active {
+      @extend $color-btn;
 
-    &.active:hover {
-      box-shadow: 0rem 0rem .75rem var(--color-pink);
+      &:hover{
+        box-shadow: 0 0 .75rem var(--color-pink);
+        color: var(--grey-0);
+      }
+    }
+
+    &.expand {
+      background-color: rgba(0,0,0,0.05);
+
+      .submenu {
+        display: block;
+      }
     }
 
     &::before {

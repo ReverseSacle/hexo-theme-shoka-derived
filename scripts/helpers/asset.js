@@ -6,11 +6,11 @@ const theme_env = require('../../package.json');
 
 hexo.extend.helper.register('hexo_env', function(type) {
   return this.env[type];
-})
+});
 
 hexo.extend.helper.register('theme_env', function(type) {
   return theme_env[type];
-})
+});
 
 // Optional code for google font
 /*
@@ -65,12 +65,12 @@ hexo.extend.helper.register('_vendor_js', function() {
 
   if(jsdelivr_url.length)
   {
-    var proxy_statics = all_config.proxy_statics;
-    if("/" != proxy_statics)
+    var proxy = all_config.plugin_proxy;
+    if("/" != proxy)
     {
-      if(-1 == proxy_statics.indexOf("gh")){ proxy_statics = proxy_statics.slice(2); }
-      else{ proxy_statics = proxy_statics.slice(2,index); }
-      Js_mix.push(proxy_statics + 'combine/' + jsdelivr_url);
+      if(-1 == proxy.indexOf("gh")){ proxy = proxy.slice(2); }
+      else{ proxy = proxy.slice(2,index); }
+      Js_mix.push(proxy + 'combine/' + jsdelivr_url);
     }
     else{ Js_mix.push("cdn.jsdelivr.net/combine/" + jsdelivr_url); }
   }

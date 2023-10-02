@@ -185,5 +185,13 @@ gulp.task('default', gulp.parallel(
 + Delete `media` plugin
 + Delete the `fireworks` effect
 + Remove the subtitle content in the title
-+ Code correct
++ Correct code writing logic
 + Remove the blur effect of author img and change the css of author image
++ Theme config `statics` is splited to three part
+  + `statics` - CDN statics for `html, js and css` that are in blog
+  + `inner_proxy` - reverse proxy for card cover image and `.ico` file
+  + `plugin_proxy` - reverse proxy for plugin
++ Change scrollbar color
++ Modify page menu css that above and below author image
++ Correct HTML label attribute writing logic
++ Correct CSS attribute writing logic

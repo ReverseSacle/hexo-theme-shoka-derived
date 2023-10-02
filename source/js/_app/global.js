@@ -1,4 +1,5 @@
-var statics = CONFIG.statics.indexOf('//') > 0 ? CONFIG.statics : CONFIG.root;
+//var statics = CONFIG.statics.indexOf('//') > 0 ? CONFIG.statics : CONFIG.root;
+var proxy = CONFIG.inner_proxy.indexOf('//') > 0 ? CONFIG.inner_proxy : CONFIG.root;
 var scrollAction = { x: 'undefined', y: 'undefined' };
 var diffY = 0;
 var originTitle, titleTime;
@@ -124,13 +125,13 @@ const visibilityListener = function() {
   document.addEventListener('visibilitychange', function() {
     switch(document.visibilityState) {
       case 'hidden':
-        $('[rel="icon"]').attr('href', statics + CONFIG.favicon.hidden);
+        $('[rel="icon"]').attr('href', proxy + CONFIG.favicon.hidden);// static + 
         document.title = LOCAL.favicon.hide;
         if(CONFIG.loader.switch){ Loader.show(); }
         clearTimeout(titleTime);
         break;
       case 'visible':
-        $('[rel="icon"]').attr('href', statics + CONFIG.favicon.normal);
+        $('[rel="icon"]').attr('href', proxy + CONFIG.favicon.normal);// static +
         document.title = LOCAL.favicon.show;
         if(CONFIG.loader.switch){ Loader.hide(1000); }
         titleTime = setTimeout(function() {

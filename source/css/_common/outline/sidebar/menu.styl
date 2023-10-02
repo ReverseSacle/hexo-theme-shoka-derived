@@ -10,6 +10,7 @@
     display: block;
     color: var(--grey-5);
     the-transition();
+    background-color: rgba(0,0,0,0.06);/* no exit originally */
 
     a {
       color: inherit;
@@ -24,7 +25,7 @@
     }
 
     &:hover {
-      background-color: rgba(0,0,0,.1);
+      background-color: rgba(0,0,0,0.1);
       color: inherit;
 
       .submenu {
@@ -49,14 +50,12 @@
       }
     }
 
-
     &.expand {
       background-color: rgba(0,0,0,.05);
 
       .submenu {
         display: block;
       }
-
     }
 
   }

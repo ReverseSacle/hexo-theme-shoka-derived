@@ -26,13 +26,13 @@ const getScript = function(url, callback, condition) {
 
 const assetUrl = function(asset, type) {
   const str = CONFIG[asset][type];
-  if(str.indexOf('npm')>-1||str.indexOf('gh')>-1||str.indexOf('combine')>-1)
+  if(-1 != str.indexOf('npm') || -1 != str.indexOf('gh') || -1 != str.indexOf('combine'))
     return "//cdn.jsdelivr.net/" + str;
 
-  if(str.indexOf('http')>-1)
-    return str;
+  if(str.indexOf('http')>-1){ return str; }
 
-  return statics + str;
+  // statics + str
+  return (CONFIG.statics.indexOf('//') > 0 ? CONFIG.statics : CONFIG.root) + str;
 }
 
 const vendorJs = function(type, callback, condition) {

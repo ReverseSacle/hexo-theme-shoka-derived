@@ -8,12 +8,17 @@ open_graph:
   #fb_app_id:
 
 # Assets
+# statics for html, js and css 
 statics: / #//cdn.jsdelivr.net/gh/username/RepositoryName@latest/
 css: css
 js: js
 images: images
-# jsdelivr reverse_proxy
-proxy_statics: /
+
+# reverse proxy
+# reverse proxy for card cover image and `.ico` file 
+inner_proxy: /
+# reverse proxy for plugin
+plugin_proxy: /
 
 # themes/shoka/source/images/***
 favicon:

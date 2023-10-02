@@ -47,7 +47,7 @@ const randomBG = function(count = 1, image_server = null, image_list = []) {
   }
 
   return parseImage(image_list[Math.floor(Math.random() * image_list.length)], 'mw690');
-}
+};
 
 hexo.extend.helper.register('_url', function(path, text, options = {}) {
   if(!path){ return; }
@@ -73,7 +73,6 @@ hexo.extend.helper.register('_url', function(path, text, options = {}) {
   }
 
   for (let key in options) {
-
     /**
      * If option have `class` attribute, add it to
      * 'exturl' class if `exturl` option enabled.
@@ -115,7 +114,7 @@ hexo.extend.helper.register('_image_url', function(img, path = '') {
   } else {
     return url_for.call(this, statics + (post_asset_folder ? path : '') + img);
   }
-})
+});
 
 hexo.extend.helper.register('_cover', function(item, num) {
   const { statics, js, image_server, image_list } = hexo.theme.config;
@@ -128,7 +127,7 @@ hexo.extend.helper.register('_cover', function(item, num) {
     return randomBG(num || 1, image_server, image_list);
   }
 
-})
+});
 
 hexo.extend.helper.register('_md5', function(path) {
   let str = url_for.call(this, path);
@@ -150,18 +149,14 @@ hexo.extend.helper.register('canonical', function() {
   return `<link rel="canonical" href="${this._permapath(this.url)}">`;
 });
 
-/**
- * Get page path given a certain language tag
- */
+// Get page path given a certain language tag
 hexo.extend.helper.register('i18n_path', function(language) {
   const { path, lang } = this.page;
   const base = path.startsWith(lang) ? path.slice(lang.length + 1) : path;
   return url_for.call(this, `${this.languages.indexOf(language) === 0 ? '' : '/' + language}/${base}`);
 });
 
-/**
- * Get the language name
- */
+// Get the language name
 hexo.extend.helper.register('language_name', function(language) {
   const name = hexo.theme.i18n.__(language)('name');
   return name === 'name' ? language : name;

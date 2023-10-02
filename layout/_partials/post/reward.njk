@@ -11,7 +11,7 @@
         {%- set translation = name %}
       {%- endif %}
       <div>
-        <img data-src="{{ url_for(theme.statics + theme.images + image) }}" alt="{{ author }} {{ translation }}">
+        <img data-src="{{ url_for(theme.inner_proxy + theme.images + image) }}" alt="{{ author }} {{ translation }}">
         <p>{{ translation }}</p>
       </div>
     {%- endfor %}
