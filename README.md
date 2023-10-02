@@ -14,7 +14,7 @@
 
    ```bash
    # hexo-renderer-multi-markdown-it
-   npm uninsatll hexo-renderer-marked --save
+   npm uninstall hexo-renderer-marked --save
    npm install https://github.com/ReverseSacle/hexo-renderer-multi-markdown-it.git --save
    
    # hexo-autoprefixer
