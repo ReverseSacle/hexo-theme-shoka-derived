@@ -144,7 +144,7 @@ post:
 # Reward (Donate)
 reward:
   # If true, reward will be displayed in every article by default.
-  enable: false
+  enable: true
   account:
     wechatpay: /wechatpay.png
     alipay: /alipay.png

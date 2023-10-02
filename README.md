@@ -108,7 +108,9 @@
            output: "feed.json"
    ```
 
-(**Optional**)Using Gulp for cleaning Js, CSS and HTML.
+## Optional plugins
+
+Using Gulp for cleaning Js, CSS and HTML.
 
 ```bash
 # install gulp
@@ -118,10 +120,12 @@ npm install gulp --save-dev
 npm install gulp-clean-css gulp-html-minifier-terser gulp-htmlclean gulp-terser --save-dev
 ```
 
-Move to your hexo root dir, and create a new file named `gulp.js`，add following content.
+Move to your hexo root dir, and create a new file named `gulp.js`, add following content.
+
+(Usual command using example, `hexo clean && hexo g && gulp`)
 
 ```javascript
-// Dependience
+// Dependiences
 var gulp = require('gulp');
 var cleanCSS = require('gulp-clean-css');
 var htmlmin = require('gulp-html-minifier-terser');
@@ -180,5 +184,6 @@ gulp.task('default', gulp.parallel(
 + Delete `Mermaid` plugin
 + Delete `media` plugin
 + Delete the `fireworks` effect
-+ Remove the subtitle in the title
++ Remove the subtitle content in the title
 + Code correct
++ Remove the blur effect of author img and change the css of author image

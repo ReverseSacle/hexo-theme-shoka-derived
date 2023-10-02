@@ -121,10 +121,8 @@ const siteInit = function() {
   window.addEventListener('beforeunload', function() {
     pagePosition();
   })
-
   siteRefresh(1);
 }
 
 window.addEventListener('DOMContentLoaded', siteInit);
-
 console.log('%c Theme.Shoka.Derived v' + CONFIG.version + ' ', 'color: white; background: #e9546b; padding:5px 0;');
