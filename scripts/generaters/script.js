@@ -15,6 +15,7 @@ hexo.extend.generator.register('script', function() {
     root: config.root,
     statics: theme.statics,
     inner_proxy: theme.inner_proxy,
+    plugin_proxy: theme.plugin_proxy,
     favicon: {
       normal: theme.images + "/favicon.ico",
       hidden: theme.images + "/failure.ico"
