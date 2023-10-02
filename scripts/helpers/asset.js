@@ -66,11 +66,17 @@ hexo.extend.helper.register('_vendor_js', function() {
   if(jsdelivr_url.length)
   {
     var proxy = all_config.plugin_proxy;
+
     if("/" != proxy)
     {
+      let consume = proxy.indexOf("/");/* consume the indexof */
+      if(-1 != proxy.indexOf("//") || -1 != proxy.indexOf("/")){
+        throw new Error("Reverse proxy format Error,be sure format xxx.example.com\n");
+      }
+
       if(-1 == proxy.indexOf("gh")){ proxy = proxy.slice(2); }
       else{ proxy = proxy.slice(2,index); }
-      Js_mix.push(proxy + 'combine/' + jsdelivr_url);
+      Js_mix.push("//" + proxy + '/combine/' + jsdelivr_url);
     }
     else{ Js_mix.push("cdn.jsdelivr.net/combine/" + jsdelivr_url); }
   }
