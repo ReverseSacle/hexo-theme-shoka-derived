@@ -19,7 +19,7 @@ const sideBarToggleHandle = function(_, force) {
 
 const sideBarTab = function() {
   var sideBarInner = sideBar.child('.inner');
-//  var panels = sideBar.find('.panel');
+  var panels = sideBar.find('.panel');
 
   if(sideBar.child('.tab')) {
     sideBarInner.removeChild(sideBar.child('.tab'));
@@ -118,7 +118,7 @@ const sidebarTOC = function() {
   var tocElement = sideBar.child('.contents.panel');
 
   //function(index, lock)
-  var activateNavByIndex = function(index) {
+  var activateNavByIndex = function(index,_) {
     var target = navItems[index];
 
     if (!target){ return; }
@@ -174,7 +174,7 @@ const sidebarTOC = function() {
     if (!window.IntersectionObserver){ return; }
 
     // function(entries, observe)
-    var observer = new IntersectionObserver(function(entries) {
+    var observer = new IntersectionObserver(function(entries,_) {
       var index = findIndex(entries) + (diffY < 0? 1 : 0);
       if(activeLock === null) { activateNavByIndex(index); }
     }, {

@@ -1,9 +1,9 @@
 'use strict';
 const fs = require('hexo-fs');
-//const url = require('url');
+const url = require('url');
 
 // function(locals)
-hexo.extend.generator.register('script', function() {
+hexo.extend.generator.register('script', function(_) {
   const config = hexo.config;
   const theme = hexo.theme.config;
 

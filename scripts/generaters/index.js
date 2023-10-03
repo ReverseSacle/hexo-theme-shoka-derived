@@ -55,7 +55,7 @@ hexo.extend.generator.register('index', function(locals) {
           pl = Math.max(0, pl - child.length);
           if(pl > 0) {
             // function(item, i)
-            cat.subs.push.apply(cat.subs, cat.posts.sort({title: 1}).filter(function(item) {
+            cat.subs.push.apply(cat.subs, cat.posts.sort({title: 1}).filter(function(item,_) {
                 if(item.categories.last()._id == cat._id){ return true; }
             }).limit(pl).toArray());
           }

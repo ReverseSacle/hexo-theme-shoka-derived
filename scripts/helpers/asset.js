@@ -69,8 +69,7 @@ hexo.extend.helper.register('_vendor_js', function() {
 
     if("/" != proxy)
     {
-      let consume = proxy.indexOf("/");/* consume the indexof */
-      if(-1 != proxy.indexOf("//") || -1 != proxy.indexOf("/")){
+      if(-1 != proxy.indexOf("//") || -1 != (proxy.indexOf("/"),proxy.indexOf("/"))){
         throw new Error("Reverse proxy format Error,be sure format xxx.example.com\n");
       }
 

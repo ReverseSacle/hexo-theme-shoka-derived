@@ -14,7 +14,7 @@ hexo.extend.filter.register('before_generate', function() {
   const data = hexo.locals.get('data');
 
   if (data.languages) {
-//    const { language } = hexo.config;
+    const { language } = hexo.config;
     const { i18n } = hexo.theme;
 
     // lang => {}

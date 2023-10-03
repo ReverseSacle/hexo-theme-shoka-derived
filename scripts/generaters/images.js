@@ -3,8 +3,8 @@
 const fs = require('hexo-fs');
 
 // function(locals)
-hexo.extend.generator.register('images', function(){
-//  const config = hexo.config;
+hexo.extend.generator.register('images', function(_){
+  const config = hexo.config;
   const theme = hexo.theme.config;
   const dir = 'source/_data/' + theme.images + '/';
 

@@ -32,7 +32,7 @@ const cardActive = function() {
   }
 
   //function(element, index)
-  $.each('.cards .item', function(element) {
+  $.each('.cards .item', function(element,_) {
     ['mouseenter', 'touchstart'].forEach(function(item){
       element.addEventListener(item, function(event) {
         if($('.cards .item.active')) {
@@ -236,7 +236,7 @@ const postBeauty = function() {
       fullscreenBtn.child('.ic').className = 'ic i-expand';
     }
     var fullscreenHandle = function(event) {
-//      var target = event.currentTarget;
+      var target = event.currentTarget;
       if (element.hasClass('fullscreen')) {
         removeFullscreen();
         hideCode && hideCode();
@@ -339,7 +339,7 @@ const tabFormat = function() {
   // tab
   var first_tab;
   //function(element, index)
-  $.each('div.tab', function(element) {
+  $.each('div.tab', function(element,_) {
     if(element.attr('data-ready')){ return; }
 
     var id = element.attr('data-id');

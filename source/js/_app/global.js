@@ -1,4 +1,4 @@
-//var statics = CONFIG.statics.indexOf('//') > 0 ? CONFIG.statics : CONFIG.root;
+var statics = CONFIG.statics.indexOf('//') > 0 ? CONFIG.statics : CONFIG.root;
 var proxy = CONFIG.inner_proxy.indexOf('//') > 0 ? CONFIG.inner_proxy : CONFIG.root;
 var scrollAction = { x: 'undefined', y: 'undefined' };
 var diffY = 0;

@@ -44,7 +44,7 @@ const vendorJs = function(type, callback, condition) {
 };
 
 //function(type, condition)
-const vendorCss = function(type) {
+const vendorCss = function(type,_) {
   if(window['css'+type]){ return; }
 
   if(LOCAL[type]) {
@@ -105,7 +105,7 @@ const transition = function(target, type, complete) {
     case 'bounceUpIn':
       animation = {
         //function(anim)
-        begin: function() { target.display('block'); },
+        begin: function(_) { target.display('block'); },
         translateY: [
           { value: -60, duration: 200 },
           { value: 10, duration: 200 },
@@ -119,7 +119,7 @@ const transition = function(target, type, complete) {
     case 'shrinkIn':
       animation = {
         //function(anim)
-        begin: function() { target.display('block') },
+        begin: function(_) { target.display('block') },
         scale: [
           { value: 1.1, duration: 300 },
           { value: 1, duration: 200 }
@@ -131,7 +131,7 @@ const transition = function(target, type, complete) {
     case 'slideRightIn':
       animation = {
         //function(anim)
-        begin: function() { target.display('block') },
+        begin: function(_) { target.display('block') },
         translateX: [100, 0],
         opacity: [0, 1]
       };
