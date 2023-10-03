@@ -26,10 +26,17 @@ const getScript = function(url, callback, condition) {
 
 const assetUrl = function(asset, type) {
   const str = CONFIG[asset][type];
-  if(-1 != str.indexOf('npm') || -1 != str.indexOf('gh') || -1 != str.indexOf('combine'))
-    return "//cdn.jsdelivr.net/" + str;
 
   if(-1 != str.indexOf('http')){ return str; }
+  
+  if(-1 != str.indexOf('npm') || -1 != str.indexOf('gh') || -1 != str.indexOf('combine'))
+  {
+    const proxy = CONFIG.plugin_proxy;
+    if("/" != proxy && -1 == proxy.indexOf("/")){
+      return "//" + proxy + '/combine/' + str;
+    }
+    else{ return "https://cdn.jsdelivr.net/" + str; }
+  }
 
   // statics + str
   return CONFIG.statics + str;

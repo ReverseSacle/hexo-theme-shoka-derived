@@ -65,23 +65,16 @@ hexo.extend.helper.register('_vendor_js', function() {
 
   if(jsdelivr_url.length)
   {
-    var proxy = all_config.plugin_proxy;
+    const proxy = all_config.plugin_proxy;
 
-    if("/" != proxy)
-    {
-      if(-1 != proxy.indexOf("//") || -1 != (proxy.indexOf("/"),proxy.indexOf("/"))){
-        throw new Error("Reverse proxy format Error,be sure format xxx.example.com\n");
-      }
-
-      if(-1 == proxy.indexOf("gh")){ proxy = proxy.slice(2); }
-      else{ proxy = proxy.slice(2,index); }
+    if("/" != proxy && -1 == proxy.indexOf("/")){
       Js_mix.push("//" + proxy + '/combine/' + jsdelivr_url);
     }
-    else{ Js_mix.push("cdn.jsdelivr.net/combine/" + jsdelivr_url); }
+    else{ Js_mix.push("https://cdn.jsdelivr.net/combine/" + jsdelivr_url); }
   }
 
   return Js_mix.map(function(url) {
-      return htmlTag('script', { src: `//${url}` }, '');
+      return htmlTag('script', { src: `${url}` }, '');
   }).join('');
 });
 
