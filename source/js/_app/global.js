@@ -66,19 +66,18 @@ const changeMetaTheme = function(color) {
 };
 
 const themeColorListener = function() {
-  window.matchMedia('(prefers-color-scheme: dark)').addListener(function(mediaQueryList) {
+  const mediaQueryList = window.matchMedia('(prefers-color-scheme: dark)');
+  const _Callback = function(mediaQueryList) {
     if(mediaQueryList.matches){ changeTheme('dark'); } 
     else { changeTheme(); }
-  });
+  };
+
+  try{ mediaQueryList.addEventListener('change', _Callback); }
+  catch(err){ mediaQueryList.addListener(_Callback); }// Alread correct
 
   var t = store.get('theme');
-  if(t) {
-    changeTheme(t);
-  } else {
-    if(CONFIG.darkmode) {
-      changeTheme('dark');
-    }
-  }
+  if(t) { changeTheme(t); } 
+  else if(CONFIG.darkmode) { changeTheme('dark'); }
 
   $('.theme').addEventListener('click', function(event) {
     var btn = event.currentTarget.child('.ic');
@@ -89,46 +88,47 @@ const themeColorListener = function() {
     });
 
     var hideNeko = function() {
-        transition(neko, {
-          delay: 2500,
-          opacity: 0
-        }, function() {
-          BODY.removeChild(neko);
-        });
-    }
+      transition(neko, {
+        delay: 2500,
+        opacity: 0
+      }, function() {
+        BODY.removeChild(neko);
+      });
+    };
 
     if(btn.hasClass('i-sun')) {
       var c = function() {
-          neko.addClass('dark');
-          changeTheme('dark');
-          store.set('theme', 'dark');
-          hideNeko();
-        }
+        neko.addClass('dark');
+        changeTheme('dark');
+        store.set('theme', 'dark');
+        hideNeko();
+      };
     } else {
       neko.addClass('dark');
       var c = function() {
-          neko.removeClass('dark');
-          changeTheme();
-          store.set('theme', 'light');
-          hideNeko();
-        }
+        neko.removeClass('dark');
+        changeTheme();
+        store.set('theme', 'light');
+        hideNeko();
+      };
     }
     transition(neko, 1, function() {
       setTimeout(c, 210);
-    })
+    });
   });
 };
 
 const visibilityListener = function() {
   document.addEventListener('visibilitychange', function() {
     switch(document.visibilityState) {
-      case 'hidden':
+      case 'hidden':{
         $('[rel="icon"]').attr('href', proxy + CONFIG.favicon.hidden);// static + 
         document.title = LOCAL.favicon.hide;
         if(CONFIG.loader.switch){ Loader.show(); }
         clearTimeout(titleTime);
         break;
-      case 'visible':
+      }
+      case 'visible':{
         $('[rel="icon"]').attr('href', proxy + CONFIG.favicon.normal);// static +
         document.title = LOCAL.favicon.show;
         if(CONFIG.loader.switch){ Loader.hide(1000); }
@@ -136,6 +136,7 @@ const visibilityListener = function() {
           document.title = originTitle;
         }, 2000);
         break;
+      }
     }
   });
 };
@@ -172,8 +173,10 @@ const scrollHandle = function(event) {
   var winHeight = window.innerHeight;
   var docHeight = getDocHeight();
   var contentVisibilityHeight = docHeight > winHeight ? docHeight - winHeight : document.body.scrollHeight - winHeight;
-  var SHOW = window.pageYOffset > headerHightInner;
-  var startScroll = window.pageYOffset > 0;
+//var SHOW = window.pageYOffset > headerHightInner;
+//var startScroll = window.pageYOffset > 0;
+  var SHOW = window.scrollY > headerHightInner;
+  var startScroll = window.scrollY > 0;
 
   if (SHOW) { changeMetaTheme('#FFF'); } 
   else { changeMetaTheme('#222'); }
@@ -181,16 +184,18 @@ const scrollHandle = function(event) {
   siteNav.toggleClass('show', SHOW);
   toolBtn.toggleClass('affix', startScroll);
   siteBrand.toggleClass('affix', startScroll);
-  sideBar.toggleClass('affix', window.pageYOffset > headerHight && document.body.offsetWidth > 991);
+//sideBar.toggleClass('affix', window.pageYOffset > headerHight && document.body.offsetWidth > 991);
+  sideBar.toggleClass('affix', window.scrollY > headerHight && document.body.offsetWidth > 991);
 
   if (typeof scrollAction.y == 'undefined') {
-    scrollAction.y = window.pageYOffset;
+    //scrollAction.y = window.pageYOffset;
+    scrollAction.y = window.scrollY;
     //scrollAction.x = Container.scrollLeft;
     //scrollAction.y = Container.scrollTop;
   }
   //var diffX = scrollAction.x - Container.scrollLeft;
-  diffY = scrollAction.y - window.pageYOffset;
-
+  //diffY = scrollAction.y - window.pageYOffset;
+  diffY = scrollAction.y - window.scrollY;
   //if (diffX < 0) {
   // Scroll right
   //} else if (diffX > 0) {
@@ -208,9 +213,11 @@ const scrollHandle = function(event) {
     // First scroll event
   }
   //scrollAction.x = Container.scrollLeft;
-  scrollAction.y = window.pageYOffset;
+  //scrollAction.y = window.pageYOffset;
+  scrollAction.y = window.scrollY;
 
-  var scrollPercent = Math.round(Math.min(100 * window.pageYOffset / contentVisibilityHeight, 100)) + '%';
+  //var scrollPercent = Math.round(Math.min(100 * window.pageYOffset / contentVisibilityHeight, 100)) + '%';
+  var scrollPercent = Math.round(Math.min(100 * window.scrollY / contentVisibilityHeight, 100)) + '%';
   backToTop.child('span').innerText = scrollPercent;
   $('.percent').width(scrollPercent);
 };
@@ -258,7 +265,21 @@ const clipBoard = function(str, callback) {
   ta.select();
   ta.setSelectionRange(0, str.length);
   ta.readOnly = false;
-  var result = document.execCommand('copy');
+  //var result = document.execCommand('copy');
+  var result = function(text) {
+    navigator.clipboard.writeText(text).catch(function(err){
+      try { document.execCommand('copy'); }// Alread correct
+      catch(err){
+        const textArea = document.createElement('textarea');
+        textArea.value = text;
+        
+        document.body.appendChild(textArea);
+        textArea.select();
+        document.body.removeChild(textArea);
+      }
+    });
+  };
+  
   callback && callback(result);
   ta.blur(); // For iOS
   if (selected) {

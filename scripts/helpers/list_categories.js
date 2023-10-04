@@ -79,7 +79,7 @@ hexo.extend.helper.register('_categories', function() {
 
       result[cat._id] = cat;
     }
-  })
+  });
 
   return result;
 });
@@ -123,7 +123,7 @@ hexo.extend.helper.register('_category_posts', function(page) {
         result += `<li${current}><a href="${hexo.url_for(post.path)}" rel="bookmark" title="${post.title}">${post.title}</a></li>`;
       })
     }
-  })
+  });
 
   return result;
 });

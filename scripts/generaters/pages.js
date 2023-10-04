@@ -20,5 +20,5 @@ hexo.extend.generator.register('pages', function(_) {
       data: {type: '404'},
       layout: ['page']
     }
-  ]
+  ];
 });

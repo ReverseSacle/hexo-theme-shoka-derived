@@ -6,10 +6,10 @@ const cardActive = function() {
       if( article.hasClass("show") === false){
         article.addClass("show");
       }
-    })
+    });
   } else {
     var io = new IntersectionObserver(function(entries) {
-        entries.forEach(function(article) {
+      entries.forEach(function(article) {
           if (article.target.hasClass("show")) {
             io.unobserve(article.target);
           } else {
@@ -39,12 +39,12 @@ const cardActive = function() {
           $('.cards .item.active').removeClass('active');
         }
         element.addClass('active');
-      })
+      });
     });
     ['mouseleave'].forEach(function(item){
       element.addEventListener(item, function(event) {
         element.removeClass('active');
-      })
+      });
     });
   });
 };
@@ -65,7 +65,7 @@ const registerExtURL = function() {
         link.dataset.backgroundImage = element.dataset.backgroundImage;
       }
       element.parentNode.replaceChild(link, element);
-    });
+  });
 };
 
 const postFancybox = function(p) {
@@ -94,9 +94,7 @@ const postFancybox = function(p) {
           var $imageWrapLink = $image.wrap('<a class="fancybox" href="'+imageLink+'" itemscope itemtype="http://schema.org/ImageObject" itemprop="url"></a>').parent('a');
           if (!$image.is('.gallery img')) {
             $imageWrapLink.attr('data-fancybox', 'default').attr('rel', 'default');
-          } else {
-            captionClass = 'jg-caption';
-          }
+          } else { captionClass = 'jg-caption'; }
         }
         if(info = element.attr('title')) {
           $imageWrapLink.attr('data-caption', info);
@@ -160,7 +158,7 @@ const postBeauty = function() {
         return window.clipboardData.setData("text", textData);
       }
     }
-  }
+  };
 
   $.each('li ruby', function(element) {
     var parent = element.parentNode;
@@ -168,11 +166,11 @@ const postBeauty = function() {
       parent = element.parentNode.parentNode;
     }
     parent.addClass('ruby');
-  })
+  });
 
   $.each('ol[start]', function(element) {
     element.style.counterReset = "counter " + parseInt(element.attr('start') - 1);
-  })
+  });
 
   $.each('.md table', function(element) {
     element.wrap({
@@ -201,13 +199,13 @@ const postBeauty = function() {
         code_container.find('pre').forEach(function(line) {
           code += comma + line.innerText;
           comma = '\n';
-        })
+        });
 
         clipBoard(code, function(result) {
           target.child('.ic').className = result ? 'ic i-check' : 'ic i-times';
           target.blur();
           showtip(LOCAL.copyright);
-        })
+        });
       });
       copyBtn.addEventListener('mouseleave', function(event) {
         setTimeout(function() {
@@ -234,7 +232,7 @@ const postBeauty = function() {
       element.scrollTop = 0;
       BODY.removeClass('fullscreen');
       fullscreenBtn.child('.ic').className = 'ic i-expand';
-    }
+    };
     var fullscreenHandle = function(event) {
       var target = event.currentTarget;
       if (element.hasClass('fullscreen')) {
@@ -247,7 +245,7 @@ const postBeauty = function() {
         fullscreenBtn.child('.ic').className = 'ic i-compress';
         showCode && showCode();
       }
-    }
+    };
     fullscreenBtn.addEventListener('click', fullscreenHandle);
     caption && caption.addEventListener('click', fullscreenHandle);
 
@@ -260,21 +258,19 @@ const postBeauty = function() {
       var showCode = function() {
         code_container.style.maxHeight = "";
         showBtn.addClass('open');
-      }
+      };
 
       var hideCode = function() {
         code_container.style.maxHeight = "300px";
         showBtn.removeClass('open');
-      }
+      };
 
       showBtn.addEventListener('click', function(event) {
         if (showBtn.hasClass('open')) {
           removeFullscreen();
           hideCode();
           pageScroll(code_container);
-        } else {
-          showCode();
-        }
+        } else { showCode(); }
       });
     }
   });
@@ -299,9 +295,7 @@ const postBeauty = function() {
       if (element.hasClass('correct')) {
         element.toggleClass('right');
         element.parentNode.parentNode.addClass('show');
-      } else {
-        element.toggleClass('wrong');
-      }
+      } else { element.toggleClass('wrong'); }
     });
   });
 
@@ -331,7 +325,7 @@ const postBeauty = function() {
 
   $.each('div.tags a', function(element) {
     element.className = ['primary', 'success', 'info', 'warning', 'danger'][Math.floor(Math.random() * 5)];
-  })
+  });
 
 };
 
@@ -358,9 +352,7 @@ const tabFormat = function() {
 
       element.parentNode.insertBefore(box, element);
       first_tab = true;
-    } else {
-      first_tab = false;
-    }
+    } else { first_tab = false; }
 
     var ul = box.child('.nav ul');
     if(!ul) {
@@ -383,7 +375,7 @@ const tabFormat = function() {
       var target = event.currentTarget;
       box.find('.active').forEach(function(el) {
         el.removeClass('active');
-      })
+      });
       element.addClass('active');
       target.addClass('active');
     });
@@ -398,9 +390,7 @@ const loadComments = function() {
   if (!element) {
     goToComment.display("none");
     return;
-  } else {
-    goToComment.display("");
-  }
+  } else { goToComment.display(""); }
 
   if (!window.IntersectionObserver) {
     vendorCss('valine');

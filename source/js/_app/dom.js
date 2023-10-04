@@ -56,9 +56,7 @@ Object.assign(HTMLElement.prototype, {
     if(value) {
       this.setAttribute(type, value);
       return this;
-    } else {
-      return this.getAttribute(type);
-    }
+    } else { return this.getAttribute(type); }
   },
   insertAfter: function(element) {
     var parent = this.parentNode;
@@ -66,9 +64,8 @@ Object.assign(HTMLElement.prototype, {
     else{ parent.insertBefore(element, this.nextSibling); }
   },
   display: function(d) {
-    if(d == null) {
-      return this.style.display;
-    } else {
+    if(d == null) { return this.style.display; } 
+    else {
       this.style.display = d;
       return this;
     }

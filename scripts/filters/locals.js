@@ -2,7 +2,7 @@
 
 'use strict';
 
-// const path = require('path');
+const path = require('path');
 const url = require('url');
 
 // num => {}
@@ -54,5 +54,4 @@ hexo.extend.filter.register('template_locals', function(locals) {
   if (locals.page.month) {
     locals.page.month = fmtNum(locals.page.month);
   }
-
 });

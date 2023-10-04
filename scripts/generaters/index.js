@@ -24,9 +24,7 @@ hexo.extend.generator.register('index', function(locals) {
     if (cat.parent) {
       var pCat = categories.findOne({'_id': cat.parent});
       return getTopcat(pCat);
-    } else {
-      return cat;
-    }
+    } else { return cat; }
   }
 
   // (cat) => {}
@@ -42,9 +40,7 @@ hexo.extend.generator.register('index', function(locals) {
 
         let topcat = getTopcat(cat);
 
-        if (topcat._id != cat._id) {
-          cat.top = topcat;
-        }
+        if (topcat._id != cat._id) { cat.top = topcat; }
 
         let child = categories.find({'parent': cat._id});
         let pl = 6;

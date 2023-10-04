@@ -5,11 +5,12 @@
 // data => {}
 hexo.extend.filter.register('after_post_render', function(data) {
   const { config } = hexo;
-//  const theme = hexo.theme.config;
+  const theme = hexo.theme.config;
 
   data.content = data.content.replace(/(<img[^>]*) src=/img, '$1 data-src=');
 
   const url = require('url');
+  
   const siteHost = url.parse(config.url).hostname || config.url;
   // (match, href, html) => {}
   data.content = data.content.replace(/<a[^>]* href="([^"]+)"[^>]*>([^<]*)<\/a>/img, function(match, href, html) {

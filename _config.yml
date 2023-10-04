@@ -89,14 +89,14 @@ iconfont: "1832207_igi8uaupcus"
 
 menu:
   home: / || home
-  about: /about/ || user
-  # posts:
-  #   default: / || feather
-  #   archives: /archives/ || list-alt
-  #   categories: /categories/ || th
-  #   tags: /tags/ || tags
-  friends: /friends/ || heart
-  # links: /links/ || magic
+  #about: /about/ || user
+  posts:
+     default: / || feather
+     archives: /archives/ || list-alt
+     categories: /categories/ || th
+     tags: /tags/ || tags
+  #friends: /friends/ || heart
+  #links: /links/ || magic
 
 # Social Links
 # Usage: `Key: permalink || icon || color`
@@ -124,7 +124,7 @@ sidebar:
   position: right
   # position: right
   # Replace the default avatar image and set the url here.
-  avatar: avatar.jpg
+  avatar: avatar.webp
 
 widgets:
   # if true, will show random posts
