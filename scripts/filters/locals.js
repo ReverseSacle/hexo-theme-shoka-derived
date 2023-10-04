@@ -44,7 +44,7 @@ hexo.extend.filter.register('template_locals', function(locals) {
       cat.name = locals.page.lastcat = pangu.spacing(cat.name);
     }
       return cat;
-    })
+    });
   }
 
   if (locals.page.category) {

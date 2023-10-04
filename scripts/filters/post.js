@@ -23,5 +23,4 @@ hexo.extend.filter.register('after_post_render', function(data) {
 
     return `<span class="exturl" data-url="${Buffer.from(href).toString('base64')}">${html}</span>`;
   });
-
 }, 0);

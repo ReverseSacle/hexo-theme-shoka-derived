@@ -25,7 +25,7 @@ hexo.extend.generator.register('index', function(locals) {
       var pCat = categories.findOne({'_id': cat.parent});
       return getTopcat(pCat);
     } else { return cat; }
-  }
+  };
 
   // (cat) => {}
   if (categories && categories.length) {

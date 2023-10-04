@@ -70,7 +70,7 @@ const pjaxScript = function(element) {
 
   parent.removeChild(element);
   var script = document.createElement('script');
-  if (element.id) { script.id = element.id;}
+  if (element.id) { script.id = element.id; }
   if (element.className) { script.className = element.className; }
   if (element.type) { script.type = element.type; }
   if (element.src) {
@@ -94,7 +94,7 @@ const pageScroll = function(target, offset, complete) {
     easing: "easeInOutQuad",
     scrollTop: offset || (typeof target == 'number' ? target : (target ? target.top() + document.documentElement.scrollTop - siteNavHeight : 0)),
     complete: function() { complete && complete(); }
-  }
+  };
   anime(opt);
 };
 

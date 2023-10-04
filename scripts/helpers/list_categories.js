@@ -97,9 +97,9 @@ hexo.extend.helper.register('_category_prev', function(name) {
       // (cat, i) => {}
       categories.find({_id: current.parent}).forEach(function(cat) {
         result += `<a href="${hexo.url_for(cat.path)}">${cat.name}</a>`;
-      })
+      });
     }
-  })
+  });
 
   return result;
 });
@@ -121,7 +121,7 @@ hexo.extend.helper.register('_category_posts', function(page) {
         var current = '';
         if(post.path == page.path) { current = ' class="active"'; }
         result += `<li${current}><a href="${hexo.url_for(post.path)}" rel="bookmark" title="${post.title}">${post.title}</a></li>`;
-      })
+      });
     }
   });
 

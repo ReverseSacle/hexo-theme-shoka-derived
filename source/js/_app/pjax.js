@@ -1,7 +1,7 @@
 const domInit = function() {
   $.each('.overview .menu > .item', function(el) {
     siteNav.child('.menu').appendChild(el.cloneNode(true));
-  })
+  });
 
   loadCat.addEventListener('click', Loader.vanish);
   menuToggle.addEventListener('click', sideBarToggleHandle);
@@ -63,9 +63,7 @@ const siteRefresh = function(reload) {
     }, 1000);
   }, window.MiniValine);
 
-  if(!reload) {
-    $.each('script[data-pjax]', pjaxScript);
-  }
+  if(!reload) { $.each('script[data-pjax]', pjaxScript); }
 
   originTitle = document.title;
 
@@ -92,7 +90,6 @@ const siteRefresh = function(reload) {
 };
 
 const siteInit = function() {
-
   domInit();
 
   pjax = new Pjax({
@@ -120,7 +117,7 @@ const siteInit = function() {
   window.addEventListener('pjax:success', siteRefresh);
   window.addEventListener('beforeunload', function() {
     pagePosition();
-  })
+  });
   siteRefresh(1);
 };
 

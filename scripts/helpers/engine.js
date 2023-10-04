@@ -29,7 +29,7 @@ const randomBG = function(count = 1, image_server = null, image_list = []) {
       return img;
     } 
     else { return 'https://'+randomServer+'.sinaimg.cn/'+size+'/'+img; }
-  }
+  };
 
   if(count && count > 1) {
     var shuffled = image_list.slice(0), i = image_list.length, min = i - count, temp, index;
@@ -78,9 +78,7 @@ hexo.extend.helper.register('_url', function(path, text, options = {}) {
      */
     if (exturl !== '' && key === 'class') {
       attrs[key] += ' ' + options[key];
-    } else {
-      attrs[key] = options[key];
-    }
+    } else { attrs[key] = options[key]; }
   }
 
   if (attrs.class && Array.isArray(attrs.class)) {

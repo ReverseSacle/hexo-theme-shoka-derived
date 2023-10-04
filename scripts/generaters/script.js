@@ -48,7 +48,7 @@ hexo.extend.generator.register('script', function(_) {
       apiKey   : config.algolia.apiKey,
       indexName: config.algolia.indexName,
       hits     : theme.search.hits
-    }
+    };
   }
 
   var text = '';

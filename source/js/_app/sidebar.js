@@ -6,9 +6,8 @@ const sideBarToggleHandle = function(_, force) {
     if(force) { sideBar.style = ''; } 
     else { transition(sideBar, 'slideRightOut'); }
   } else {
-    if(force) {
-      sideBar.style = '';
-    } else {
+    if(force) { sideBar.style = ''; } 
+    else {
       transition(sideBar, 'slideRightIn', function() {
           sideBar.addClass('on');
           menuToggle.addClass('close');
@@ -48,9 +47,7 @@ const sideBarTab = function() {
     if(active) {
       element.addClass(active);
       tab.addClass(active);
-    } else {
-      element.removeClass('active');
-    }
+    } else { element.removeClass('active'); }
 
     tab.addEventListener('click', function(event) {
       var target = event.currentTarget;
@@ -65,7 +62,6 @@ const sideBarTab = function() {
       });
 
       sideBar.child('.panel.' + target.className.replace(' item', '')).addClass('active');
-
       target.addClass('active');
     });
 
@@ -122,7 +118,6 @@ const sidebarTOC = function() {
     var target = navItems[index];
 
     if (!target){ return; }
-
     if (target.hasClass('current')) { return; }
 
     $.each('.toc .active', function(element) {
@@ -150,7 +145,7 @@ const sidebarTOC = function() {
     if(getComputedStyle(sideBar).display != 'none' && tocElement.hasClass('active')) {
       pageScroll(tocElement, target.offsetTop- (tocElement.offsetHeight / 4));
     }
-  }
+  };
 
   var findIndex = function(entries) {
     var index = 0;
@@ -163,12 +158,10 @@ const sidebarTOC = function() {
     for (; index < entries.length; index++) {
       if (entries[index].boundingClientRect.top <= 0) {
         entry = entries[index];
-      } else {
-        return sections.indexOf(entry.target);
-      }
+      } else { return sections.indexOf(entry.target); }
     }
     return sections.indexOf(entry.target);
-  }
+  };
 
   var createIntersectionObserver = function() {
     if (!window.IntersectionObserver){ return; }
@@ -185,7 +178,7 @@ const sidebarTOC = function() {
     sections.forEach(function(element) {
       element && observer.observe(element);
     });
-  }
+  };
 
   createIntersectionObserver();
 };
@@ -214,8 +207,6 @@ const menuActive = function() {
     element.toggleClass('active', active);
     if(element.parentNode.child('.active') && parentItem.hasClass('dropdown')) {
       parentItem.removeClass('active').addClass('expand');
-    } else {
-      parentItem.removeClass('expand');
-    }
+    } else { parentItem.removeClass('expand'); }
   });
 };
