@@ -196,4 +196,3 @@ gulp.task('default', gulp.parallel(
 + Correct HTML label attribute writing logic
 + Correct CSS attribute writing logic
 + Add css style for `Hyperlink`(a label) and modify css style of `collapse` Hyperlink
-+ Correct CSS for li label in ul label of `collapse` 
