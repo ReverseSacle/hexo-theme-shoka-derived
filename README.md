@@ -120,7 +120,7 @@ npm install gulp --save-dev
 npm install gulp-clean-css gulp-html-minifier-terser gulp-htmlclean --save-dev
 ```
 
-Move to your hexo root dir, and create a new file named `gulp.js`, add following content.
+Move to your hexo root dir, and create a new file named `gulpfile.js`, add following content.
 
 (Usual command using example, `hexo clean && hexo g && gulp`)
 
