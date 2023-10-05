@@ -117,7 +117,7 @@ Using Gulp for cleaning Js, CSS and HTML.
 npm install gulp --save-dev
 
 # install gulp plugins
-npm install gulp-clean-css gulp-html-minifier-terser gulp-htmlclean --save-dev
+npm install gulp-clean-css gulp-html-minifier-terser gulp-htmlclean gulp-purgecss gulp-terser --save-dev
 ```
 
 Move to your hexo root dir, and create a new file named `gulpfile.js`, add following content.
@@ -125,25 +125,54 @@ Move to your hexo root dir, and create a new file named `gulpfile.js`, add follo
 (Usual command using example, `hexo clean && hexo g && gulp`)
 
 ```javascript
-// Dependiences
-var gulp = require('gulp');
-var cleanCSS = require('gulp-clean-css');
-var htmlmin = require('gulp-html-minifier-terser');
-var htmlclean = require('gulp-htmlclean');
+// Dependience
+const gulp = require('gulp');
+const cleanCSS = require('gulp-clean-css');
+const htmlmin = require('gulp-html-minifier-terser');
+const htmlclean = require('gulp-htmlclean');
+const purgecss = require('gulp-purgecss');
+const terser = require('gulp-terser');
 
 // Compress js
-gulp.task('compress', () =>
-  gulp.src(['./public/**/*.js', '!./public/**/*.min.js'])
-    .pipe(gulp.dest('./public'))
-);
+gulp.task('compress', async() =>{
+  return gulp.src(['./public/**/*.js', '!./public/**/*.min.js'])
+    .pipe(terser())
+    .pipe(gulp.dest('./public'));
+});
+
+// Purge css
+gulp.task('purgecss', () => {
+    return gulp.src(['./public/**/*.css'])
+        .pipe(purgecss({
+            content: ['./public/**/*.html']
+        }))
+		.pipe(gulp.dest('./public'));
+});
 
 // Compress css
 gulp.task('minify-css', () => {
-    return gulp.src(['./public/**/*.css'])
-        .pipe(cleanCSS({
-            compatibility: 'ie11'
-        }))
-        .pipe(gulp.dest('./public'));
+	return gulp.src(['./public/**/*.css'])
+	  .pipe(cleanCSS({
+		level: {
+		  2: {
+			mergeAdjacentRules: true, 
+			mergeIntoShorthands: true, 
+			mergeMedia: true, 
+			mergeNonAdjacentRules: true, 
+			mergeSemantically: false,
+			overrideProperties: true, 
+			removeEmpty: true, 
+			reduceNonAdjacentRules: true, 
+			removeDuplicateFontRules: true,
+			removeDuplicateMediaBlocks: true, 
+			removeDuplicateRules: true, 
+			removeUnusedAtRules: false, 
+			restructureRules: false, 
+			skipProperties: [] 
+		  }
+		}
+	  }))
+      .pipe(gulp.dest('./public'));
 });
 
 // Compress html
@@ -151,29 +180,26 @@ gulp.task('minify-html', () => {
     return gulp.src('./public/**/*.html','!./public/**/json.ejs','!./public/**/atom.ejs','!./public/**/rss.ejs')
         .pipe(htmlclean())
         .pipe(htmlmin({
-            removeComments: true, // Delete html comments
-            collapseWhitespace: true, // Compress html
+            removeComments: true,
+            collapseWhitespace: true,
             collapseBooleanAttributes: true,
-            // Ignore the value of bool type, 
-            // example：<input checked="true"/> ==> <input />
             removeEmptyAttributes: true,
-            // Delete all the space value of attribute, 
-            // example：<input id="" /> ==> <input />
             removeScriptTypeAttributes: true,
-            // Delete the attribute type="text/javascript" in lable <script>
             removeStyleLinkTypeAttributes: true,
-            // Delete the attribute type="text/css" in <style> and <link>
-            minifyJS: true, // Compress JS
-            minifyCSS: true, // Compress CSS
-            minifyURLs: true  // Compress URL
+			removeAttributeQuotes: true,
+			removeCDATASectionsFromCDATA: true,
+			caseSensitive: true,
+            minifyJS: true,
+            minifyCSS: true,
+            minifyURLs: true
         }))
-        .pipe(gulp.dest('./public'))
+        .pipe(gulp.dest('./public'));
 });
 
 // Task command for using gulp command
-gulp.task('default', gulp.parallel(
-  'compress', 'minify-css', 'minify-html'
-));
+gulp.task('default', gulp.series('purgecss',gulp.parallel(
+  'compress','minify-css', 'minify-html'
+)));
 ```
 
 ## Modification

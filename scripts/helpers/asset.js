@@ -68,7 +68,7 @@ hexo.extend.helper.register('_vendor_js', function() {
     const proxy = all_config.plugin_proxy;
 
     if("/" != proxy && -1 == proxy.indexOf("/")){
-      Js_mix.push("//" + proxy + '/' + jsdelivr_url);
+      Js_mix.push("//" + proxy + '/combine/' + jsdelivr_url);
     }
     else{ Js_mix.push("https://cdn.jsdelivr.net/combine/" + jsdelivr_url); }
   }
