@@ -117,7 +117,7 @@ Using Gulp for cleaning JS, CSS and HTML.
 npm install gulp --save-dev
 
 # install gulp plugins
-npm install gulp-clean-css gulp-html-minifier-terser gulp-htmlclean gulp-purgecss gulp-terser --save-dev
+npm install gulp-clean-css gulp-html-minifier-terser gulp-htmlclean gulp-terser --save-dev
 ```
 
 Move to your hexo root dir, and create a new file named `gulpfile.js`, add following content.
@@ -130,17 +130,7 @@ const gulp = require('gulp');
 const cleanCSS = require('gulp-clean-css');
 const htmlmin = require('gulp-html-minifier-terser');
 const htmlclean = require('gulp-htmlclean');
-const purgecss = require('gulp-purgecss');
 const terser = require('gulp-terser');
-
-// Purge css
-gulp.task('purgecss', () => {
-    return gulp.src(['./public/**/*.css'])
-        .pipe(purgecss({
-            content: ['./public/**/*.html']
-        }))
-		.pipe(gulp.dest('./public'));
-});
 
 // Compress js
 gulp.task('compress', async() =>{
@@ -178,9 +168,9 @@ gulp.task('minify-html', () => {
 });
 
 // Task command for using gulp command
-gulp.task('default', gulp.series('purgecss',gulp.parallel(
+gulp.task('default', gulp.parallel(
   'compress','minify-css', 'minify-html'
-)));
+));
 ```
 
 ## Modification
