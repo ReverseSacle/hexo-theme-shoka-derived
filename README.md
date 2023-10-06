@@ -110,7 +110,7 @@
 
 ## Optional plugins
 
-Using Gulp for cleaning Js, CSS and HTML.
+Using Gulp for cleaning JS, CSS and HTML.
 
 ```bash
 # install gulp
@@ -133,13 +133,6 @@ const htmlclean = require('gulp-htmlclean');
 const purgecss = require('gulp-purgecss');
 const terser = require('gulp-terser');
 
-// Compress js
-gulp.task('compress', async() =>{
-  return gulp.src(['./public/**/*.js', '!./public/**/*.min.js'])
-    .pipe(terser())
-    .pipe(gulp.dest('./public'));
-});
-
 // Purge css
 gulp.task('purgecss', () => {
     return gulp.src(['./public/**/*.css'])
@@ -149,51 +142,39 @@ gulp.task('purgecss', () => {
 		.pipe(gulp.dest('./public'));
 });
 
+// Compress js
+gulp.task('compress', async() =>{
+	return gulp.src(['./public/**/*.js', '!./public/**/*.min.js'])
+	  .pipe(terser())
+	  .pipe(gulp.dest('./public'));
+});
+
 // Compress css
 gulp.task('minify-css', () => {
 	return gulp.src(['./public/**/*.css'])
-	  .pipe(cleanCSS({
-		level: {
-		  2: {
-			mergeAdjacentRules: true, 
-			mergeIntoShorthands: true, 
-			mergeMedia: true, 
-			mergeNonAdjacentRules: true, 
-			mergeSemantically: false,
-			overrideProperties: true, 
-			removeEmpty: true, 
-			reduceNonAdjacentRules: true, 
-			removeDuplicateFontRules: true,
-			removeDuplicateMediaBlocks: true, 
-			removeDuplicateRules: true, 
-			removeUnusedAtRules: false, 
-			restructureRules: false, 
-			skipProperties: [] 
-		  }
-		}
-	  }))
+	  .pipe(cleanCSS())
       .pipe(gulp.dest('./public'));
 });
 
 // Compress html
 gulp.task('minify-html', () => {
     return gulp.src('./public/**/*.html','!./public/**/json.ejs','!./public/**/atom.ejs','!./public/**/rss.ejs')
-        .pipe(htmlclean())
-        .pipe(htmlmin({
-            removeComments: true,
-            collapseWhitespace: true,
-            collapseBooleanAttributes: true,
-            removeEmptyAttributes: true,
-            removeScriptTypeAttributes: true,
-            removeStyleLinkTypeAttributes: true,
+		.pipe(htmlclean())
+		.pipe(htmlmin({
+			removeComments: true,
+			collapseWhitespace: true,
+			collapseBooleanAttributes: true,
+			removeEmptyAttributes: true,
+			removeScriptTypeAttributes: true,
+			removeStyleLinkTypeAttributes: true,
 			removeAttributeQuotes: true,
 			removeCDATASectionsFromCDATA: true,
 			caseSensitive: true,
-            minifyJS: true,
-            minifyCSS: true,
-            minifyURLs: true
-        }))
-        .pipe(gulp.dest('./public'));
+			minifyJS: true,
+			minifyCSS: true,
+			minifyURLs: true
+		}))
+		.pipe(gulp.dest('./public'));
 });
 
 // Task command for using gulp command
