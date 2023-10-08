@@ -265,20 +265,7 @@ const clipBoard = function(str, callback) {
   ta.select();
   ta.setSelectionRange(0, str.length);
   ta.readOnly = false;
-  //var result = document.execCommand('copy');
-  var result = function(text) {
-    navigator.clipboard.writeText(text).catch(function(err){
-      try { document.execCommand('copy'); }// Alread correct
-      catch(err){
-        const textArea = document.createElement('textarea');
-        textArea.value = text;
-        
-        document.body.appendChild(textArea);
-        textArea.select();
-        document.body.removeChild(textArea);
-      }
-    });
-  };
+  var result = document.execCommand('copy');
   
   callback && callback(result);
   ta.blur(); // For iOS
