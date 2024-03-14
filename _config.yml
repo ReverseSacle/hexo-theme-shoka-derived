@@ -16,10 +16,10 @@ images: images
 
 # reverse proxy
 # reverse proxy for static file,like card cover image and `.ico` file
-# format "//......../", default format "/"
-inner_proxy: /
 # Jsdelivr reverse proxy for plugin,format "xxx.example.com", default format "/"
 plugin_proxy: /
+# format "//cdn_proxy.com/gh/user_name/user_name.github.io@master/", default format "/"
+inner_proxy: /
 
 # themes/shoka/source/images/***
 favicon:

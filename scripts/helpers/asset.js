@@ -82,8 +82,9 @@ hexo.extend.helper.register('_css', function(...urls) {
   const { statics, css } = hexo.theme.config;
 
   // url => {}，`.bind(this)` will make outer `this` binded in inner.
-  return urls.map(function(url) { 
-    return htmlTag('link', { rel: 'stylesheet', href: url_for.call(this, `${statics}${css}/${url}?v=${theme_env['version']}`) });
+  return urls.map(function(url) {
+    return htmlTag('link', { rel: 'stylesheet', href: url_for.call(this, `${statics}${css}/${url}`) });
+    // return htmlTag('link', { rel: 'stylesheet', href: url_for.call(this, `${statics}${css}/${url}?v=${theme_env['version']}`) });
   }.bind(this)).join('');
 });
 
@@ -93,6 +94,7 @@ hexo.extend.helper.register('_js', function(...urls) {
 
   // url => {}
   return urls.map(function(url) { 
-    return htmlTag('script', { src: url_for.call(this, `${statics}${js}/${url}?v=${theme_env['version']}`) }, '');
+    return htmlTag('script', { src: url_for.call(this, `${statics}${js}/${url}`) }, '');
+    // return htmlTag('script', { src: url_for.call(this, `${statics}${js}/${url}?v=${theme_env['version']}`) }, '');
   }.bind(this)).join('');
 });
