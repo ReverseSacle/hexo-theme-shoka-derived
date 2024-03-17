@@ -23,19 +23,20 @@ hexo.extend.generator.register('script', function(_) {
     darkmode: theme.darkmode,
     auto_scroll: theme.auto_scroll,
     js: {
-      valine: theme.vendors.js.valine,
+      waline: theme.vendors.js.waline,
       chart: theme.vendors.js.chart,
       copy_tex: theme.vendors.js.copy_tex,
       fancybox: theme.vendors.js.fancybox
     },
     css: {
-      valine: theme.css + "/comment.css",
+      waline_crop: theme.css + "/comment.css",
+      waline: theme.vendors.css.waline,
       katex: theme.vendors.css.katex,
       fancybox: theme.vendors.css.fancybox
     },
     loader: theme.loader,
     search : null,
-    valine: theme.valine,
+    waline: theme.waline,
     quicklink: {
       timeout : theme.quicklink.timeout,
       priority: theme.quicklink.priority

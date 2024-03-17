@@ -1,19 +1,16 @@
 # hexo-theme-shoka-derived
+## Usage
 
-[简体中文](./README.md) | [English](./README_en.md)
-
-## 使用方法
-
-1. 克隆这个仓库
+1. Clone this repository.
 
    ```bash
    # cd your_blog_root_path
    git clone https://github.com/ReverseSacle/hexo-theme-shoka-derived.git ./themes/shoka
    ```
 
-2. 确保已进入到hexo根目录，打开`_config.yml`文件，修改`theme`的值为`shoka`
+2. Be sure you are in the root of hexo dir，open file `_config.yml`，change the value of  the variable `theme` to `shoka`.  
 
-3. 安装必要的插件
+3. Install the necessary plugins.
 
    ```bash
    # hexo-renderer-multi-markdown-it
@@ -33,7 +30,7 @@
    npm install hexo-feed --save-dev
    ```
 
-4. 进入到hexo根目录，打开`_config.yml`文件，添加下面内容到文件末尾
+4. In the root of hexo dir, open file `_config.yml`，add following content to the end of file.
 
    ```yaml
    # markdown
@@ -111,9 +108,9 @@
            output: "feed.json"
    ```
 
-## 可选插件
+## Optional plugins
 
-使用`Gulp`来压缩JS, CSS 和 HTML。
+Using Gulp for cleaning JS, CSS and HTML.
 
 ```bash
 # install gulp
@@ -123,9 +120,9 @@ npm install gulp --save-dev
 npm install gulp-clean-css gulp-html-minifier-terser gulp-htmlclean gulp-terser --save-dev
 ```
 
-进入到`hexo`根目录，新建一个名为`gulpfile.js`的文件，打开该文件并添加下面内容。
+Move to your hexo root dir, and create a new file named `gulpfile.js`, add following content.
 
-(通常的使用命令 - `hexo clean && hexo g && gulp`)
+(Usual command using example, `hexo clean && hexo g && gulp`)
 
 ```javascript
 // Dependience
@@ -176,24 +173,24 @@ gulp.task('default', gulp.parallel(
 ));
 ```
 
-## 已修改的内容
+## Modification
 
-+ 删除`SEO`插件
-+ 删除`Mermaid`插件
-+ 删除`media`插件
-+ 删除`fireworks`效果
-+ 移除网址副标题
-+ 修正主题的代码逻辑
-+ 移除头像模糊效果，修改头像的`CSS`样式
-+ 将主题的`statics`参数拆分为三部分
-  + `statics` - 博客静态部署链接，主要用于html, js and css
-  + `inner_proxy` - 文章/翻转卡片封面以及`.ico`文件的反向代理链接
-  + `plugin_proxy` - 主题插件的反向代理链接
-+ 修改滚动条的配色
-+ 修改页面中头像区域顶部以及底部的菜单css样式
-+ 修正HTML标签属性
-+ 修正CSS样式属性
-+ 添加超链接(`Hyperlink`)标签的CSS样式，修改`collapse`超链接的CSS样式
-+ 修正ul标签下的li标签的CSS样式
-+ 调整主题字体间距
-+ 评论系统从valine迁移到waline
++ Delete `SEO` setting
++ Delete `Mermaid` plugin
++ Delete `media` plugin
++ Delete the `fireworks` effect
++ Remove the subtitle content in the title
++ Correct code writing logic
++ Remove the blur effect of author img and change the css of author image
++ Theme config `statics` is splited to three part
+  + `statics` - CDN statics for `html, js and css` that are in blog
+  + `inner_proxy` - reverse proxy for card cover image and `.ico` file
+  + `plugin_proxy` - reverse proxy for plugin
++ Change scrollbar color
++ Modify page menu css that above and below author image
++ Correct HTML label attribute writing logic
++ Correct CSS attribute writing logic
++ Add css style for `Hyperlink`(a label) and modify css style of `collapse` Hyperlink
++ Correct CSS for li label in ul label of `collapse` 
++ Adjust the font spacing
++ Change comment-system valine to waline

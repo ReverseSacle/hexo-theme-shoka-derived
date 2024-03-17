@@ -64,6 +64,19 @@ const vendorCss = function(type,_) {
   }
 };
 
+const vendorCss_body = function(type) {
+  var name = 'css-' + type;
+  if(undefined !== document.getElementsByClassName(name)[0]){
+    return;
+  }
+    
+  var new_link = document.body.createChild('link', {
+    rel: 'stylesheet',
+    href: assetUrl("css", type)
+  });
+  new_link.setAttribute('class',name);
+};
+
 const pjaxScript = function(element) {
   const code = element.text || element.textContent || element.innerHTML || '';
   var parent = element.parentNode;
