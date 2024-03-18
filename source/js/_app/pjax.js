@@ -56,18 +56,34 @@ const recent_comment_create = function(comments) {
   var getText = function(new_text) {
     new_text = new_text.replace(/\n/g, '');
     var place_text = '';
-    var text_size = 24;
+    var text_size = 100;
     var len = new_text.length;
+    var smallest = [
+      'r','g','t','j',
+      'f','i','v','y',
+      'x','z',',','.',
+      '!',';',':','"',
+      '(',')','-',' '
+    ];
+    var regex = /[a-z]/;
+    var regex2 = /[!"#$%&'()*+,-./:;<=>?@[\]^_`{|}~]/;
+    var regex3 = /[A-Z]/;
 
-    for(var i = 0;i < len;)
+    for(var i = 0,count = 0;i < len;)
     {
       if('<' == new_text[i])
       { 
         while(i < len && '>' != new_text[i++]);
         continue;
       }
-      if(place_text.length >= text_size){ break; }
-      place_text += new_text[i++];
+      if(count >= text_size){ break; }
+      var c = new_text[i++];
+      if(c in smallest){ count += 1; }
+      else if(regex.test(c) || regex2.test(c)){ count += 2; }
+      else if(regex3.test(c)){ count += 2.5; }
+      else{ count += 3.5; }
+      
+      place_text += c;
     }
   
     if(new_text.length > text_size) { place_text += '...'; }
