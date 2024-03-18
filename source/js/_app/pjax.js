@@ -54,15 +54,20 @@ const recent_comment_create = function(comments) {
     return year + '-' + month + '-' + day;
   };
   var getText = function(new_text) {
+    new_text = new_text.replace(/\n/g, '');
     var place_text = '';
-    var text_size = 27;
-  
+    var text_size = 24;
     var len = new_text.length;
-    for(var i = 0;i < len;++i)
+
+    for(var i = 0;i < len;)
     {
-      while('<' == new_text[i]){ while(i < len && '>' != new_text[i++]); }
-      if(i >= len || place_text.length >= text_size){ break; }
-      place_text += new_text[i];
+      if('<' == new_text[i])
+      { 
+        while(i < len && '>' != new_text[i++]);
+        continue;
+      }
+      if(place_text.length >= text_size){ break; }
+      place_text += new_text[i++];
     }
   
     if(new_text.length > text_size) { place_text += '...'; }
@@ -78,6 +83,7 @@ const recent_comment_create = function(comments) {
   a_label.setAttribute('data-pjax-state','');
 
   var breadcrumb_label = document.createElement('span');
+  breadcrumb_label.style.marginBottom = '-5.3px';
   breadcrumb_label.innerText = comments[i].nick + ' @ ' + getDate(comments[i].time);
 
   var text_span = document.createElement('span');
