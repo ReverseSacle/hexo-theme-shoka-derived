@@ -4,7 +4,7 @@ var scrollAction = { x: 'undefined', y: 'undefined' };
 var diffY = 0;
 var originTitle, titleTime;
 
-const BODY = document.getElementsByTagName('body')[0];
+const BODY = document.body;
 const HTML = document.documentElement;
 const Container = $('#container');
 const loadCat = $('#loading');

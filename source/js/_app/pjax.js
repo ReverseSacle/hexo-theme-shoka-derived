@@ -40,44 +40,71 @@ const pjaxReload = function() {
   pageScroll(0);
 };
 
-const recent_comment_create = function(data) {
+const recent_comment_create = function(comments) {
+  var len = comments.length;
+  if(0 == len){ return; }
+
+  var getDate = function(timestamp) {
+    var date = new Date(timestamp);
+    var year = date.getFullYear();
+    var month = date.getMonth() + 1;
+    var day = date.getDate();
+    month = month < 10 ? '0' + month : month;
+    day = day < 10 ? '0' + day : day;
+    return year + '-' + month + '-' + day;
+  };
+  var getText = function(new_text) {
+    var place_text = '';
+    var text_size = 27;
+  
+    var len = new_text.length;
+    for(var i = 0;i < len;++i)
+    {
+      while('<' == new_text[i]){ while(i < len && '>' != new_text[i++]); }
+      if(i >= len || place_text.length >= text_size){ break; }
+      place_text += new_text[i];
+    }
+  
+    if(new_text.length > text_size) { place_text += '...'; }
+    return place_text;
+  };
   var waline_recent = document.getElementById('waline-recent');
+  var i = 0;
   var li_label = document.createElement('li');
   li_label.setAttribute('class','item');
   
   var a_label = document.createElement('a');
-  a_label.setAttribute('href',data.url);
+  a_label.setAttribute('href',comments[i].url);
   a_label.setAttribute('data-pjax-state','');
 
   var breadcrumb_label = document.createElement('span');
-  var date = new Date(data.time);
-  var year = date.getFullYear();
-  var month = date.getMonth() + 1;
-  var day = date.getDate();
-  month = month < 10 ? '0' + month : month;
-  day = day < 10 ? '0' + day : day;
-  breadcrumb_label.innerText = data.nick + ' @ ' + year + '-' + month + '-' + day;
+  breadcrumb_label.innerText = comments[i].nick + ' @ ' + getDate(comments[i].time);
 
   var text_span = document.createElement('span');
-  var new_text = data.comment.replace('<p>','').replace('</p>','').replace('<br>','');
-  var place_text = '';
-  var text_size = 27;
-
-  var len = new_text.length;
-  for(var i = 0;i < len;++i)
-  {
-    while('<' == new_text[i]){ while(i < len && '>' != new_text[i++]); }
-    if(i >= len || place_text.length >= text_size){ break; }
-    place_text += new_text[i];
-  }
-
-  if(new_text.length > text_size) { place_text += '...'; }
-  text_span.innerText = place_text;
+  text_span.innerText = getText(comments[i].comment);
 
   a_label.appendChild(breadcrumb_label);
   a_label.appendChild(text_span);
   li_label.appendChild(a_label);
   waline_recent.append(li_label);
+
+  for(++i;i < len;++i)
+  {
+    var new_li_label = li_label.cloneNode(false);
+    var new_a_label = a_label.cloneNode(false);
+    new_a_label.setAttribute('href',comments[i].url);
+
+    var new_breadcrumb_label = breadcrumb_label.cloneNode(false);
+    new_breadcrumb_label.innerText = comments[i].nick + ' @ ' + getDate(comments[i].time);
+
+    var new_text_span = text_span.cloneNode(false);
+    new_text_span.innerText = getText(comments[i].comment);
+
+    new_a_label.appendChild(new_breadcrumb_label);
+    new_a_label.appendChild(new_text_span);
+    new_li_label.appendChild(new_a_label);
+    waline_recent.append(new_li_label);
+  }
 }
 
 const siteRefresh = function(reload) {
@@ -93,10 +120,9 @@ const siteRefresh = function(reload) {
     vendorCss_body('waline');
     var getScript = function(options) {
       var name = 'script-waline';
-      var old_script = document.getElementsByClassName(name)[0];
+      var old_script = document.querySelector('body script' + '.' + name);
       if(undefined != old_script){
-        var body_label = document.body;
-        body_label.removeChild(old_script);
+        document.body.removeChild(old_script);
       }
 
       var script = document.createElement('script');
@@ -119,26 +145,16 @@ const siteRefresh = function(reload) {
   
         if(waline_recent.hasChildNodes())
         {
-          var footer_label = document.getElementById('footer');
-          var inner = footer_label.getElementsByClassName('widgets')[0];
-          var last_child = inner.lastElementChild;
-          var waline_recent_old = last_child.lastElementChild;
-          last_child.removeChild(waline_recent_old);
+          var parent_label = waline_recent.parentNode;
 
-          var new_waline_recent = document.createElement('ul');
-          new_waline_recent.setAttribute('id','waline-recent');
-
-          last_child.appendChild(new_waline_recent);
+          parent_label.removeChild(waline_recent);
+          parent_label.appendChild(waline_recent.cloneNode(false));
         }
 
         Waline.RecentComments({
           serverURL: options.serverURL,
           count: 10,
-        }).then(({ comments }) => {
-          comments.data.forEach(function(data){
-            recent_comment_create(data);
-          });
-        });
+        }).then(({ comments }) => { recent_comment_create(comments.data); });
 
         if(undefined != document.getElementById('waline-comment'))
         {

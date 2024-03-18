@@ -66,7 +66,7 @@ const vendorCss = function(type,_) {
 
 const vendorCss_body = function(type) {
   var name = 'css-' + type;
-  if(undefined !== document.getElementsByClassName(name)[0]){
+  if(undefined != document.querySelector('body link' + '.' + name)){
     return;
   }
     
