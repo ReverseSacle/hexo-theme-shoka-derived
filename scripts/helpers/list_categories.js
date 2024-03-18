@@ -9,8 +9,7 @@ const prepareQuery = function(categories, parent) {
   if (parent) { query.parent = parent; } 
   else { query.parent = {$exists: false}; }
 
-  // cat => {}
-  return categories.find(query).sort('name', 1).filter(function(cat) { return cat.length; });
+  return categories.find(query).sort('name', 1).filter(cat => cat.length);
 };
 
 hexo.extend.helper.register('_list_categories', function(depth = 0) {

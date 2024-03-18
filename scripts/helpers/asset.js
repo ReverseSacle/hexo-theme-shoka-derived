@@ -13,7 +13,6 @@ hexo.extend.helper.register('theme_env', function(type) {
 });
 
 // Optional code for google font
-/*
 // () => {}
 hexo.extend.helper.register('_vendor_font', function() {
   const config = hexo.theme.config.font;
@@ -23,7 +22,7 @@ hexo.extend.helper.register('_vendor_font', function() {
   const fontDisplay = '&display=swap';
   const fontSubset = '&subset=latin,latin-ext';
   const fontStyles = ':300,300italic,400,400italic,700,700italic';
-  const fontHost = '//fonts.googleapis.com';
+  const fontHost = config.googleapi;
 
   //Get a font list from config
   // item => {}
@@ -34,15 +33,14 @@ hexo.extend.helper.register('_vendor_font', function() {
     return '';
   });
 
-  // item => {}
-  fontFamilies = fontFamilies.filter(function(item) { item !== ''; });
+  fontFamilies = fontFamilies.filter(item => item !== '');
   fontFamilies = [...new Set(fontFamilies)];
   fontFamilies = fontFamilies.join('|');
 
   // Merge extra parameters to the final processed font string
   return fontFamilies ? htmlTag('link', { rel: 'stylesheet', href: `${fontHost}/css?family=${fontFamilies.concat(fontDisplay, fontSubset)}` }) : '';
 });
-*/
+
 
 // () =>
 hexo.extend.helper.register('_vendor_js', function() {
