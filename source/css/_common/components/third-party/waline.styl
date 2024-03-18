@@ -8,6 +8,10 @@
     line-height: initial;
 }
 
+[data-waline] p {
+    color: unset;
+}
+
 #comments {
     animation: none;
     opacity: 0;
@@ -199,10 +203,10 @@
     }
 
     .wl-cards {
-        .wl-meta span {
+        .wl-meta>span {
             font-size: $font-size-smallest;
             padding: 0.5px 2px;
-            line-height: 1.2;
+            line-height: 1.15;
             padding-top: 0;
         }
 
@@ -211,6 +215,7 @@
                 color: var(--primary-color);
             }
         }
+
         .wl-reply-wrapper .wl-close {
             .wl-close-icon {
                 width: 40px;
@@ -218,6 +223,23 @@
                 color: var(--grey-1);
             }
         }
+
+        .wl-quote {
+            border-bottom: 0.0625rem dashed var(--grey-3);
+
+            .wl-card {
+                border-bottom: 0.0625rem dashed var(--grey-3);
+            }
+
+            div:last-child .wl-card {
+                border-bottom: none;
+            }
+        }
+    }
+
+    .wl-meta>.wl-browser::before,
+    .wl-meta>.wl-os::before {
+        margin-bottom: -0.8px;
     }
 }
 
@@ -229,4 +251,3 @@
         }
     }
 }
-
