@@ -10,10 +10,10 @@
   {%- endif %}
 
   {%- if theme.waline.serverURL and theme.waline.pageview %}
-  <span id="{{ page.path | replace('index.html', '') }}" class="item" title="{{ __('post.views') }}">
+  <span class="item" data-path="{{ '/' + (page.path | replace('index.html', '')) }}" title="{{ __('post.views') }}">
       <span class="icon"><i class="ic i-eye"></i></span>
       <span class="text">{{ __('post.views') }}</span>
-      <span class="waline-pageview-count" data-path="{{ '/' + (page.path | replace('index.html', '')) }}"></span>
+      <span class="waline-pageview-count"></span>
       <span class="text">{{ __('symbols_count_time.view') }}</span>
   </span>
   {%- endif %}
