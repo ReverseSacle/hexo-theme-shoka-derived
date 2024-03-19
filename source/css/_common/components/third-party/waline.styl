@@ -12,6 +12,33 @@
     color: unset;
 }
 
+[data-waline] pre {
+    overflow: unset;
+    padding: unset;
+    line-height: unset;
+}
+
+[data-waline] code, 
+[data-waline] pre {
+    margin: unset;
+    padding: unset;
+    border-radius: unset;
+    background: unset;
+    font-size: unset;
+}
+
+[data-waline] pre code {
+    padding: unset;
+    background: unset;
+    color: unset;
+    white-space: unset;
+    word-break: unset;
+}
+
+[data-theme="dark"]:root {
+    --waline-info-bg-color: var(--grey-3);
+}
+
 #comments {
     animation: none;
     opacity: 0;
@@ -203,11 +230,16 @@
     }
 
     .wl-cards {
-        .wl-meta>span {
-            font-size: $font-size-smallest;
-            padding: 0.5px 2px;
-            line-height: 1.15;
-            padding-top: 0;
+        .wl-meta {
+            margin-top: -5px;
+            margin-left: -1px;
+
+            >span {
+                font-size: $font-size-smallest;
+                padding: 0.5px 2px;
+                line-height: 1.15;
+                padding-top: 0;
+            }
         }
 
         .wl-comment-actions button {
@@ -240,6 +272,58 @@
     .wl-meta>.wl-browser::before,
     .wl-meta>.wl-os::before {
         margin-bottom: -0.8px;
+    }
+
+    .wl-content pre, 
+    .wl-content pre[class*=language-] {
+        overflow: unset;
+        margin: unset;
+        padding: unset;
+        border-radius: unset;
+        background: unset;
+        line-height: unset;
+    }
+
+    .wl-content pre code, 
+    .wl-content pre[class*=language-] code {
+        padding: unset;
+        border-radius: unset;
+        background: unset;
+        color: unset;
+        direction: unset;
+    }
+
+    .wl-content pre {
+        position: relative;
+        overflow: hidden;
+        border-radius: 0.5rem;
+        box-shadow: 0 0.3125rem 0.625rem -0.125rem var(--grey-9-a1);
+        background: var(--grey-2);
+        color: var(--grey-7);
+        line-height: 1.6;
+        margin: 1.25rem auto;
+
+        display: block;
+        margin-block-start: 1em;
+        margin-block-end: 1em;
+        margin-inline-end: 40px;
+
+        white-space: pre;
+        border-spacing: 0;
+        width: 100%;
+        border-collapse: separate;
+        text-indent: initial;
+        font-family: Inconsolata, consolas, Menlo, -apple-system, "PingFang SC", "Microsoft YaHei";
+        font-size: 1em;
+
+        code {
+            vertical-align: middle;
+            border-color: inherit;
+        }
+
+        span {
+            margin-left: 5px;
+        }
     }
 }
 

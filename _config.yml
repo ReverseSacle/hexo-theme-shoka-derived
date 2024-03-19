@@ -193,7 +193,7 @@ waline:
   wordLimit: 0  # 评论字数限制。填入单个数字时为最大字数限制。设置为 0 时无限制
   pageSize: 10  # 评论列表分页，每页条数
   imageUploader: false  # 自定义图片上传方法。
-  highlighter: true  # 代码高亮
+  highlighter: false  # 代码高亮，除非能自定义代码高亮器，否则填false
   texRenderer: false #  自定义tex渲染
   search: false # 自定义搜索功能
   copyright: false # 是否显示页脚版权信息
@@ -204,7 +204,7 @@ waline:
   } # https://waline.js.org/cookbook/customize/locale.html
   emoji: [
     https://unpkg.com/@waline/emojis@1.2.0/alus
-  ] # 表情
+  ] # 表情 https://waline.js.org/guide/features/emoji.html
 
 
 # random image api

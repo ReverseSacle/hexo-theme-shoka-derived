@@ -193,7 +193,7 @@ gulp.task('default', gulp.parallel(
 + 修改页面中头像区域顶部以及底部的菜单css样式
 + 修正HTML标签属性
 + 修正CSS样式属性
-+ 添加超链接(`Hyperlink`)标签的CSS样式，修改`collapse`超链接的CSS样式
++ 添加超链接(`Hyperlink`)标签的CSS样式，修改`collapse`(折叠块)超链接的CSS样式
 + 修正ul标签下的li标签的CSS样式
 + 调整主题字体间距
 + 评论系统从valine迁移到waline
