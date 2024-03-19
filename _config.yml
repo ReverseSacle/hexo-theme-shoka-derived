@@ -44,7 +44,7 @@ loader:
 
 font:
   enable: true
-  googleapi: '//fonts.font.im'
+  googleapi: '//fonts.googleapis.com'
   # Font options:
   # `external: true` will load this font family from `host` above.
   # `family: Times New Roman`. Without any quotes.
