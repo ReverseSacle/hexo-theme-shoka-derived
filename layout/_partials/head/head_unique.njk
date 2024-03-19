@@ -2,8 +2,8 @@
   <meta name="keywords" content="{{ page.keywords }}" />
 {% elif page.tags and page.tags.length %}
   <meta name="keywords" content="{% for tag in page.tags.toArray() %}{{ tag.name }}{% if not loop.last %},{% endif %}{% endfor %}" />
-{% elif theme.keywords %}
-  <meta name="keywords" content="{{ theme.keywords }}" />
+{% elif config.keywords %}
+  <meta name="keywords" content="{{ config.keywords }}" />
 {% endif %}
 
 {{ canonical() }}
