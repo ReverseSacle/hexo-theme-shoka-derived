@@ -1,9 +1,12 @@
-{% if page.keywords %}
-  <meta name="keywords" content="{{ page.keywords }}" />
+{% if page.description %}
+  <meta name="description" content="{{ page.description }}" />
 {% elif page.tags and page.tags.length %}
-  <meta name="keywords" content="{% for tag in page.tags.toArray() %}{{ tag.name }}{% if not loop.last %},{% endif %}{% endfor %}" />
-{% elif config.keywords %}
-  <meta name="keywords" content="{{ config.keywords }}" />
+  <meta name="description" content="{% for tag in page.tags.toArray() %}{{ tag.name }}{% if not loop.last %},{% endif %}{% endfor %}" />
+{% elif config.description %}
+  {% if config.keywords %}
+    <meta name="keywords" content="{{ config.keywords }}" />
+  {% endif %}
+  <meta name="description" content="{{ config.description }}" />
 {% endif %}
 
 {{ canonical() }}
