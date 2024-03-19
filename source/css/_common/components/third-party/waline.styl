@@ -4,6 +4,10 @@
     --waline-font-size: initial;
 }
 
+[data-theme="dark"]:root {
+    --waline-info-bg-color: var(--grey-3);
+}
+
 [data-waline] {
     font-size: unset;
     text-align: left;
@@ -22,15 +26,15 @@
     overflow: unset;
     padding: unset;
     line-height: unset;
-}
-
-[data-waline] code, 
-[data-waline] pre {
     margin: unset;
     padding: unset;
     border-radius: unset;
     background: unset;
     font-size: unset;
+}
+
+[data-waline] code {
+    padding: .1em .2em;
 }
 
 [data-waline] pre code {
@@ -39,10 +43,6 @@
     color: unset;
     white-space: unset;
     word-break: unset;
-}
-
-[data-theme="dark"]:root {
-    --waline-info-bg-color: var(--grey-3);
 }
 
 #comments {
@@ -310,6 +310,8 @@
         width: 100%;
         border-collapse: separate;
         text-indent: initial;
+        overflow-x: scroll;
+        overflow-y: hidden;
 
         code {
             vertical-align: middle;
