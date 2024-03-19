@@ -183,7 +183,8 @@ creative_commons:
 # Comments
 # For more information: https://waline.js.org/
 waline:
-  serverURL: '' # Waline 的服务端地址
+  # Waline的服务端地址，刚刚在Vercel记录的DOMAINS链接或自绑定的域名
+  serverURL: ''
   comment: true   # 文章评论数统计，填入字符串时会作为 CSS 选择器
   pageview: true  # 文章浏览量统计，填入字符串时会作为 CSS 选择器
   lang: 'zh-CN'   # 多语言支持
