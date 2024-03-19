@@ -4,7 +4,7 @@
 
 ## 使用方法
 
-1. 克隆这个仓库
+1. hexo根目录中克隆这个仓库
 
    ```bash
    # cd your_blog_root_path

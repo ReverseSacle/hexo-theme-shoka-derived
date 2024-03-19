@@ -1,7 +1,7 @@
 # hexo-theme-shoka-derived
 ## Usage
 
-1. Clone this repository.
+1. Be in the hexo root dir, then clone this repository.
 
    ```bash
    # cd your_blog_root_path
