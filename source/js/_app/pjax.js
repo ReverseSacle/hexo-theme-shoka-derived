@@ -76,7 +76,11 @@ const recent_comment_create = function(comments) {
         while(i < len && '>' != new_text[i++]);
         continue;
       }
-      if(count >= text_size){ break; }
+      if(count >= text_size)
+      {
+        if(i < len){ place_text += '...'; }
+        break; 
+      }
       var c = new_text[i++];
       if(c in smallest){ count += 1; }
       else if(regex.test(c) || regex2.test(c)){ count += 2; }
@@ -86,7 +90,6 @@ const recent_comment_create = function(comments) {
       place_text += c;
     }
   
-    if(new_text.length > text_size) { place_text += '...'; }
     return place_text;
   };
   var waline_recent = document.getElementById('waline-recent');
