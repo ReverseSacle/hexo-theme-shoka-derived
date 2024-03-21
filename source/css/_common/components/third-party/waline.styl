@@ -55,6 +55,7 @@
     .wl-comment .wl-footer .upload,
     .wl-comment .wl-footer .wl-gif-popup,
     .wl-comment .wl-footer .wl-text-number,
+    .wl-comment .wl-header .wl-header-item label,
     .wl-meta-head .wl-sort,
     .wl-cards .wl-like,
     .wl-cards .wl-addr {
@@ -112,6 +113,7 @@
 
         .wl-panel {
             background: initial;
+            margin: unset;
         }
 
         .wl-header {
@@ -125,8 +127,8 @@
                 input {
                     padding: .625rem .3125rem;
                     width: 100%;
-                    font-weight: bold;
                     border-bottom: .0625rem dashed var(--grey-4);
+                    color: var(--text-color);
 
                     &:focus {
                         border-bottom-color: var(--primary-color);
@@ -137,15 +139,6 @@
                     position: absolute;
                     margin-left: -10px;
                     color: var(--grey-6);
-                }
-
-                .wl-nick,
-                .wl-mail {
-                    padding-left: 35px;
-                }
-
-                .wl-link {
-                    padding-left: 60px;
                 }
             }
         }
@@ -321,6 +314,10 @@
         span {
             margin-left: 5px;
         }
+    }
+
+    .wl-loading {
+        
     }
 }
 
