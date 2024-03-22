@@ -184,9 +184,6 @@ const siteRefresh = function(reload) {
         if(undefined != document.getElementById('waline-comment'))
         {
           Waline.init(options);
-          document.getElementById('wl-nick').setAttribute('placeholder','昵称');
-          document.getElementById('wl-mail').setAttribute('placeholder','邮箱');
-          document.getElementById('wl-link').setAttribute('placeholder','网址(可选)');
           setTimeout(function(){
             positionInit(1);
             postFancybox('#waline-comment');
