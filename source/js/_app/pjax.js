@@ -163,11 +163,20 @@ const siteRefresh = function(reload) {
     getScript({
       src: assetUrl('js','waline'),
       onload: function() {
-        var waline_recent = document.getElementById('waline-recent');
         var options = Object.assign({}, CONFIG.waline);
         options = Object.assign(options, LOCAL.waline||{});
         options.el = '#waline-comment';
-  
+
+        if(undefined != document.getElementById('waline-comment'))
+        {
+          Waline.init(options);
+          setTimeout(function(){
+            positionInit(1);
+            postFancybox('#waline-comment');
+          }, 1000);
+        }
+        
+        var waline_recent = document.getElementById('waline-recent');  
         if(waline_recent.hasChildNodes())
         {
           var parent_label = waline_recent.parentNode;
@@ -180,15 +189,6 @@ const siteRefresh = function(reload) {
           serverURL: options.serverURL,
           count: 10,
         }).then(({ comments }) => { recent_comment_create(comments.data); });
-
-        if(undefined != document.getElementById('waline-comment'))
-        {
-          Waline.init(options);
-          setTimeout(function(){
-            positionInit(1);
-            postFancybox('#waline-comment');
-          }, 1000);
-        }
       }
     });
   }
