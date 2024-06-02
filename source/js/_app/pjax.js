@@ -41,6 +41,16 @@ const pjaxReload = function() {
 };
 
 const recent_comment_create = function(comments) {
+  var waline_recent = $('#waline-recent');
+
+  if(waline_recent.hasChildNodes())
+  {
+    var parent_label = waline_recent.parentNode;
+
+    parent_label.removeChild(waline_recent);
+    parent_label.appendChild(waline_recent.cloneNode(false));
+  }
+
   var len = comments.length;
   if(0 == len){ return; }
 
@@ -92,7 +102,7 @@ const recent_comment_create = function(comments) {
   
     return place_text;
   };
-  var waline_recent = document.getElementById('waline-recent');
+
   var i = 0;
   var li_label = document.createElement('li');
   li_label.setAttribute('class','item');
@@ -108,6 +118,7 @@ const recent_comment_create = function(comments) {
   var text_span = document.createElement('span');
   text_span.innerText = getText(comments[i].comment);
 
+  waline_recent = $('#waline-recent');
   a_label.appendChild(breadcrumb_label);
   a_label.appendChild(text_span);
   li_label.appendChild(a_label);
@@ -132,23 +143,14 @@ const recent_comment_create = function(comments) {
   }
 };
 
-const siteRefresh = function(reload) {
-  LOCAL_HASH = 0;
-  LOCAL_URL = window.location.href;
-
-  vendorCss('katex');
-  vendorJs('copy_tex');
-  vendorJs('chart');
-
+const waline_create = function() {
   if(CONFIG.waline.serverURL)
   {
     vendorCss_body('waline');
     var getScript = function(options) {
       var name = 'script-waline';
       var old_script = document.querySelector('body script' + '.' + name);
-      if(undefined != old_script){
-        document.body.removeChild(old_script);
-      }
+      if(old_script){ document.body.removeChild(old_script); }
 
       var script = document.createElement('script');
       script.defer = true;
@@ -165,35 +167,36 @@ const siteRefresh = function(reload) {
       onload: function() {
         var options = Object.assign({}, CONFIG.waline);
         options = Object.assign(options, LOCAL.waline||{});
-        options.el = '#waline-comment';
 
-        if(undefined != document.getElementById('waline-comment'))
+        Waline.RecentComments({
+          serverURL: options.serverURL,
+          count: 10,
+        }).then(({ comments }) => { recent_comment_create(comments.data); });
+
+        if($('#waline-comment'))
         {
+          options.el = '#waline-comment';
           Waline.init(options);
           setTimeout(function(){
             positionInit(1);
             postFancybox('#waline-comment');
           }, 1000);
         }
-        
-        var waline_recent = document.getElementById('waline-recent');  
-        if(waline_recent.hasChildNodes())
-        {
-          var parent_label = waline_recent.parentNode;
-
-          parent_label.removeChild(waline_recent);
-          parent_label.appendChild(waline_recent.cloneNode(false));
-        }
-
-        Waline.RecentComments({
-          serverURL: options.serverURL,
-          count: 10,
-        }).then(({ comments }) => { recent_comment_create(comments.data); });
       }
     });
   }
+};
 
+const siteRefresh = function(reload) {
+  LOCAL_HASH = 0;
+  LOCAL_URL = window.location.href;
+
+  vendorCss('katex');
+  vendorJs('copy_tex');
+  vendorJs('chart');
+  
   if(!reload) { $.each('script[data-pjax]', pjaxScript); }
+  waline_create()
 
   originTitle = document.title;
 
