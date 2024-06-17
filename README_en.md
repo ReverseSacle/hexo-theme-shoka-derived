@@ -114,6 +114,7 @@ Using Gulp for cleaning JS, CSS and HTML.
 
 ```bash
 # install gulp
+npm install --global gulp-cli
 npm install gulp --save-dev
 
 # install gulp plugins
