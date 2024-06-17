@@ -117,6 +117,7 @@
 
 ```bash
 # install gulp
+npm install --global gulp-cli
 npm install gulp --save-dev
 
 # install gulp plugins
