@@ -241,7 +241,7 @@ vendors:
   css:
     katex: npm/katex@0.12.0/dist/katex.min.css
     waline_crop: css/comment.css
-    waline: combine/npm/@waline/client@3.1.3/dist/waline.min.css,npm/@waline/client@3/dist/waline-meta.min.css
+    waline: combine/npm/@waline/client@3/dist/waline.min.css,npm/@waline/client@3/dist/waline-meta.min.css
     fancybox: combine/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css,npm/justifiedGallery@3.8.1/dist/css/justifiedGallery.min.css
   js:
     pace: npm/pace-js@1.0.2/pace.min.js
@@ -249,9 +249,9 @@ vendors:
     anime: npm/animejs@3.2.0/lib/anime.min.js
     algolia: npm/algoliasearch@4/dist/algoliasearch-lite.umd.js
     instantsearch: npm/instantsearch.js@4/dist/instantsearch.production.min.js
-    lazyload: npm/lozad@1/dist/lozad.min.js
-    quicklink: npm/quicklink@2/dist/quicklink.umd.js
+    lazyload: npm/lozad@1.16.0/dist/lozad.min.js
+    quicklink: npm/quicklink@2.3.0/dist/quicklink.umd.js
     fancybox: combine/npm/jquery@3.5.1/dist/jquery.min.js,npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js,npm/justifiedGallery@3.8.1/dist/js/jquery.justifiedGallery.min.js
-    waline: npm/@waline/client@3.1.3/dist/waline.umd.min.js
+    waline: npm/@waline/client@3/dist/waline.umd.min.js
     copy_tex: npm/katex@0.12.0/dist/contrib/copy-tex.min.js
     chart: npm/frappe-charts@1.5.0/dist/frappe-charts.min.iife.min.js
